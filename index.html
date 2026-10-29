@@ -118,6 +118,25 @@ section{margin-top:44px}
 .reader[hidden]{display:none}
 .reader p{max-width:38rem;font-size:1.02rem}
 .reader h2{font-size:2rem}
+.news{display:grid;gap:0}
+.day{border-top:1px solid var(--line);padding:18px 0;display:grid;grid-template-columns:9em 1fr;gap:16px}
+.day .d{font-family:var(--mono);font-size:.78rem;color:var(--accent);padding-top:3px}
+.day ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.day li{max-width:42rem}
+.day li b{font-weight:600}
+.day li span{display:block;color:var(--muted);font-size:.93rem}
+.day li a{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.cases{display:grid;gap:12px}
+.case{background:var(--surface);border:1px solid var(--line);padding:20px 22px;display:grid;gap:10px;border-radius:3px}
+.case h3{font-family:var(--display);font-size:1.5rem}
+.case .kv{display:flex;flex-wrap:wrap;gap:6px}
+.case p{max-width:42rem;color:var(--muted)}
+.case .lesson{border-left:3px solid var(--accent);padding-left:12px;color:var(--fg)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:24px}
+.tabs button{font:inherit;font-size:.9rem;padding:7px 14px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;cursor:pointer}
+.tabs button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.pane[hidden]{display:none}
+@media (max-width:600px){.day{grid-template-columns:1fr}}
 .weekly{background:var(--accent);color:var(--accent-ink);padding:22px;display:grid;gap:12px;border-radius:3px}
 .weekly .eyebrow{color:inherit;opacity:.8}
 .weekly table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8rem}
@@ -258,6 +277,10 @@ footer .wrap{padding-block:22px;display:flex;justify-content:space-between;gap:1
 <div class="view" id="v-insight" hidden>
   <p class="eyebrow">Insight</p>
   <h2 style="margin:8px 0 24px" data-t="i_title"></h2>
+  <div class="tabs"><button type="button" data-p="news" data-t="i_news"></button><button type="button" data-p="cases" data-t="i_cases"></button><button type="button" data-p="guides" data-t="i_guides"></button></div>
+  <div class="pane" id="p-news"><p class="lead" style="margin-bottom:12px" data-t="i_news_lead"></p><div class="news" id="news"></div></div>
+  <div class="pane" id="p-cases" hidden><p class="lead" style="margin-bottom:18px" data-t="i_cases_lead"></p><div class="cases" id="cases"></div></div>
+  <div class="pane" id="p-guides" hidden>
   <div class="reader" id="reader" hidden></div>
   <div class="feat">
     <div class="list" id="all-articles"></div>
@@ -266,6 +289,7 @@ footer .wrap{padding-block:22px;display:flex;justify-content:space-between;gap:1
       <table id="weekly"></table>
       <span style="font-size:.78rem;opacity:.8" data-t="w_note"></span>
     </aside>
+  </div>
   </div>
 </div>
 
@@ -333,7 +357,7 @@ it:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunità",n_ins:"Insight
  o_title:"Opportunità di cessione e acquisizione",o_lead:"Le schede qui sotto sono esempi che mostrano come viene presentato un mandato: anonimo, con i numeri chiave, e con nome e documenti accessibili solo dopo la firma dell'NDA. I primi mandati reali sono in raccolta: se vuoi cedere, acquisire o cercare un socio, pubblica il tuo.",
  f_side:"Tipo di operazione",f_sector:"Settore",f_area:"Area",f_rev:"Fatturato minimo (€ mln)",f_q:"Cerca",f_q_ph:"es. packaging, Veneto, passaggio generazionale",all:"Tutte",allm:"Tutti",count:(a,b)=>`${a} opportunità su ${b}`,empty:"Nessuna opportunità con questi criteri. Prova ad allargare i filtri.",
  rev:"fatturato",ebitda:"EBITDA",evr:"Range EV",area:"Area",lock:"Ragione sociale, bilanci e information memorandum disponibili dopo la firma dell'NDA.",nda:"Richiedi accesso (NDA)",close:"Chiudi",nd:"n.d.",
- i_title:"Analisi, multipli e deal della settimana",w_title:"Esempi di operazioni tipiche",w_note:"Operazioni illustrative, non reali. La rubrica dei deal della settimana partirà con i dati di mercato.",
+ i_title:"News, casi e guide sul mercato M&A italiano",i_news:"News",i_cases:"Casi",i_guides:"Guide",i_news_lead:"Le operazioni del giorno in tre righe: chi compra, chi vende, perché conta. Fonti citate, aggiornamento nei giorni lavorativi.",i_cases_lead:"Operazioni vere, raccontate come storie: cosa è successo, cosa ha funzionato, cosa insegna a chi vende o compra.",src:"Fonte",w_title:"Esempi di operazioni tipiche",w_note:"Operazioni illustrative, non reali. La rubrica dei deal della settimana partirà con i dati di mercato.",
  a_title:"Accompagniamo imprenditori e investitori dal primo incontro al closing.",a_lead:"Un'operazione di M&A dura in media sette-nove mesi e attraversa quattro fasi. Prima ancora di affidare un mandato, ci sono alcune regole di base che fanno la differenza tra un buon prezzo e una trattativa che si arena.",
  ac_title:"Academy",ac_lead:"Un percorso gratuito in sei moduli per capire come funziona davvero un'operazione, dal primo incontro al giorno dopo il closing. Il modulo 1 è completo; gli altri sono in scrittura.",ac_done:"Completo",ac_soon:"In arrivo",ac_quiz:"Mettiti alla prova",ac_lessons:"Lezioni",
  a_adv_title:"Consigli di base",a_sell:"Se vendi",a_buy:"Se compri",a_rules:"Regole che valgono per tutti",a_cta:"Richiedi una valutazione",
@@ -348,7 +372,7 @@ en:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunities",n_ins:"Insigh
  o_title:"Sell-side and buy-side opportunities",o_lead:"The listings below are examples showing how a mandate is presented: anonymous, with the key figures, and with name and documents released only after the NDA. The first real mandates are being collected: if you want to sell, acquire or find a partner, list yours.",
  f_side:"Deal type",f_sector:"Sector",f_area:"Region",f_rev:"Minimum revenue (€ m)",f_q:"Search",f_q_ph:"e.g. packaging, Veneto, succession",all:"All",allm:"All",count:(a,b)=>`${a} of ${b} opportunities`,empty:"No opportunities match these filters. Try widening them.",
  rev:"revenue",ebitda:"EBITDA",evr:"EV range",area:"Region",lock:"Company name, financial statements and information memorandum are released after the NDA is signed.",nda:"Request access (NDA)",close:"Close",nd:"n/a",
- i_title:"Analysis, multiples and deals of the week",w_title:"Examples of typical deals",w_note:"Illustrative, not real. The deals-of-the-week column will launch with market data.",
+ i_title:"News, cases and guides on Italian M&A",i_news:"News",i_cases:"Cases",i_guides:"Guides",i_news_lead:"The day's deals in three lines: who buys, who sells, why it matters. Sources cited, updated on business days.",i_cases_lead:"Real deals told as stories: what happened, what worked, what it teaches sellers and buyers.",src:"Source",w_title:"Examples of typical deals",w_note:"Illustrative, not real. The deals-of-the-week column will launch with market data.",
  a_title:"We walk owners and investors from the first meeting to closing.",a_lead:"An M&A process takes seven to nine months on average and moves through four phases. Before you even sign a mandate, a few basic rules separate a good price from a negotiation that stalls.",
  ac_title:"Academy",ac_lead:"A free six-module path to understand how a deal really works, from the first meeting to the day after closing. Module 1 is complete; the others are being written.",ac_done:"Complete",ac_soon:"Coming soon",ac_quiz:"Test yourself",ac_lessons:"Lessons",
  a_adv_title:"Basic advice",a_sell:"If you are selling",a_buy:"If you are buying",a_rules:"Rules that apply to everyone",a_cta:"Request a valuation",
@@ -515,6 +539,57 @@ en:[
  {n:"05",title:"LOI, due diligence and the contract",sum:"From letter of intent to signing: where price is won and lost.",out:["What to fix in the LOI and what to leave open","Surviving due diligence","The contract: price, adjustments, warranties, earn-out"]},
  {n:"06",title:"The day after closing",sum:"Integration, earn-out and the seller's role after the sale.",out:["The first 100 days","Managing the earn-out without a fight","Reinvestment and the second exit"]}]};
 
+const NEWS={
+it:[
+ {d:"28 ott 2026",items:[
+  {t:"Intesa Sanpaolo ottiene dalla BCE il via libera all'OPAS su MPS",b:"Autorizzazione preventiva anche sulle partecipazioni indirette in Mediobanca, Compass e Banca Progetto; lo stesso giorno arriva l'ok della Banca d'Italia sulle controllate. Con tutte le autorizzazioni in mano, l'offerta entra nella fase finale. Perché conta: è l'operazione bancaria che da sola può portare il mercato italiano 2026 oltre i 70 miliardi.",s:"ANSA",u:"https://ansa.it/sito/notizie/economia/2026/10/27/dalla-bce-via-libera-a-intesa-sanpaolo-allacquisizione-di-mps_aeb6b178-cb0b-41a2-beef-12578feb5794.html"},
+  {t:"Sanac: il MIMIT autorizza la cessione di tre stabilimenti a Erre Trading",b:"L'azienda di refrattari in amministrazione straordinaria viene ceduta per parti; escluso per ora il sito di Assemini. L'accordo conferma 180 posti di lavoro e 15 assunzioni nel 2027. Perché conta: esempio di come una cessione da procedura concorsuale si gioca su occupazione e perimetro più che sul prezzo.",s:"Siderweb",u:"https://www.siderweb.com/articoli/industry/732455-sanac-via-libera-alla-cessione-di-tre-stabilimenti-a-erre-trading"}]},
+ {d:"27 ott 2026",items:[
+  {t:"Il gruppo emiratino EDGE chiude l'acquisto dell'80% di CMD; la famiglia Negri resta al 20%",b:"CMD (Costruzioni Motori Diesel, Potenza e Caserta) produce sistemi di propulsione per automotive, aeronautica e nautica; circa 40 milioni di ricavi e 5 di EBITDA nel 2025. Accordo preliminare a maggio, closing a fine ottobre. Perché conta: a gennaio la famiglia aveva riacquistato il 67% dai cinesi di Loncin; nove mesi dopo vende la maggioranza a un investitore strategico tenendo una minoranza. Vedi il caso completo.",s:"BeBeez",u:"https://bebeez.it/ma-e-corporate-finance/il-gruppo-emiratino-edge-chiude-lacquisizione-dell80-di-cmd-dalla-famiglia-negri-che-rimane-col-20/"}]},
+ {d:"23 ott 2026",items:[
+  {t:"Alcedo IV cede la maggioranza della cybersecurity Nethive a Bregal Milestone",b:"Alcedo aveva comprato il 53% dell'azienda padovana nel 2021; i fondatori reinvestono e restano co-CEO. In contemporanea Nethive acquisisce la romana JoyComm. Alcedo prepara intanto il fondo VI da 300 milioni. Perché conta: secondary buyout da manuale, con exit del primo fondo, reinvestimento dei fondatori e add-on al closing.",s:"BeBeez",u:"https://bebeez.it/private-equity/alcedo-iv-cede-la-maggioranza-della-cybersecurity-nethive-a-bregal-milestone-prepara-il-fondo-vi-da-300-mln-i-fondatori-reinvestono"}]},
+ {d:"19 ott 2026",items:[
+  {t:"Private equity: 476 operazioni nei primi nove mesi, il 65% sono add-on",b:"Il report BeBeez conta 476 deal annunciati o chiusi da gennaio a settembre (159 nel terzo trimestre), pari al 64% dell'intero 2025. Gli add-on sono 274, in crescita come quota sul totale; 61 riguardano target esteri. Perché conta: i fondi comprano sempre più aziende piccole da aggregare alle loro piattaforme. Per una PMI il compratore più probabile oggi è un'azienda già partecipata da un fondo.",s:"BeBeez",u:"https://bebeez.it/report/private-equity-476-deal-nei-primi-nove-mesi-del-2026-e-oltre-25-miliardi-di-euro-di-quote-passate-di-mano-il-report-di-bebeez/"}]},
+ {d:"2 ott 2026",items:[
+  {t:"KPMG: M&A Italia più selettivo, 910 operazioni e 46 miliardi nei primi nove mesi",b:"Operazioni in calo del 17,5% e controvalore del 29% rispetto al 2025, ma sei deal sopra il miliardo nel solo terzo trimestre e una pipeline di oltre 90 miliardi di operazioni annunciate. Domestico: 497 operazioni per 14 miliardi. Perché conta: meno operazioni ma più grandi; nel mid-market la selezione premia chi arriva sul mercato preparato.",s:"KPMG",u:"https://kpmg.com/it/it/media/press-releases/2026/10/mercato-ma-italia-primi-9-mesi-2026.html"},
+  {t:"BCG: record di operazioni con parte italiana nei primi sette mesi, oltre 900",b:"Numero più alto del decennio, +20% sulla media 2016-2025, ma valore a 39,9 miliardi di dollari (-26%). L'industriale è il settore con più operazioni (193) e valore più basso (1,1 miliardi). I deal sponsorizzati da fondi crescono del 37% in valore. Perché conta: il mercato italiano è fatto di tante operazioni piccole, esattamente il terreno di un marketplace per PMI.",s:"BCG",u:"https://www.bcg.com/press/2october2026-m-a-valore-globale-15-in-italia-numero-record-di-operazioni"}]}],
+en:[
+ {d:"28 Oct 2026",items:[
+  {t:"Intesa Sanpaolo gets ECB clearance for its offer on MPS",b:"Prior authorisation also covers the indirect stakes in Mediobanca, Compass and Banca Progetto; Bank of Italy cleared the subsidiaries the same day. With all approvals in hand, the offer enters its final phase. Why it matters: this single banking deal can push the 2026 Italian market past €70bn.",s:"ANSA",u:"https://ansa.it/sito/notizie/economia/2026/10/27/dalla-bce-via-libera-a-intesa-sanpaolo-allacquisizione-di-mps_aeb6b178-cb0b-41a2-beef-12578feb5794.html"},
+  {t:"Sanac: ministry authorises sale of three plants to Erre Trading",b:"The refractories maker in extraordinary administration is sold in parts; the Assemini site is excluded for now. The deal confirms 180 jobs and 15 hires in 2027. Why it matters: a sale out of insolvency is won on jobs and scope more than on price.",s:"Siderweb",u:"https://www.siderweb.com/articoli/industry/732455-sanac-via-libera-alla-cessione-di-tre-stabilimenti-a-erre-trading"}]},
+ {d:"27 Oct 2026",items:[
+  {t:"UAE's EDGE closes purchase of 80% of CMD; the Negri family keeps 20%",b:"CMD (Potenza and Caserta) makes propulsion systems for automotive, aerospace and marine; about €40m revenue and €5m EBITDA in 2025. Preliminary agreement in May, closing at end of October. Why it matters: in January the family bought back 67% from China's Loncin; nine months later it sells control to a strategic investor and keeps a minority. See the full case.",s:"BeBeez",u:"https://bebeez.it/ma-e-corporate-finance/il-gruppo-emiratino-edge-chiude-lacquisizione-dell80-di-cmd-dalla-famiglia-negri-che-rimane-col-20/"}]},
+ {d:"23 Oct 2026",items:[
+  {t:"Alcedo IV sells majority of cybersecurity firm Nethive to Bregal Milestone",b:"Alcedo bought 53% of the Padua company in 2021; the founders reinvest and stay co-CEOs. Nethive simultaneously acquires Rome-based JoyComm. Alcedo is raising a €300m Fund VI. Why it matters: a textbook secondary buyout, with first-fund exit, founder rollover and an add-on at closing.",s:"BeBeez",u:"https://bebeez.it/private-equity/alcedo-iv-cede-la-maggioranza-della-cybersecurity-nethive-a-bregal-milestone-prepara-il-fondo-vi-da-300-mln-i-fondatori-reinvestono"}]},
+ {d:"19 Oct 2026",items:[
+  {t:"Private equity: 476 deals in nine months, 65% are add-ons",b:"BeBeez counts 476 deals announced or closed January to September (159 in Q3), 64% of the whole of 2025. Add-ons are 274, a rising share; 61 target foreign companies. Why it matters: funds increasingly buy small companies to bolt onto their platforms. For an SME, today's most likely buyer is a company already backed by a fund.",s:"BeBeez",u:"https://bebeez.it/report/private-equity-476-deal-nei-primi-nove-mesi-del-2026-e-oltre-25-miliardi-di-euro-di-quote-passate-di-mano-il-report-di-bebeez/"}]},
+ {d:"2 Oct 2026",items:[
+  {t:"KPMG: a more selective Italian M&A market, 910 deals and €46bn in nine months",b:"Deals down 17.5% and value down 29% on 2025, but six deals above €1bn in Q3 alone and a pipeline of over €90bn announced. Domestic: 497 deals for €14bn. Why it matters: fewer but larger deals; in the mid-market, selection rewards those who come to market prepared.",s:"KPMG",u:"https://kpmg.com/it/it/media/press-releases/2026/10/mercato-ma-italia-primi-9-mesi-2026.html"},
+  {t:"BCG: record number of deals with an Italian party in the first seven months, over 900",b:"Highest in a decade, +20% on the 2016-2025 average, but value at $39.9bn (-26%). Industrials have the most deals (193) and the lowest value ($1.1bn). Sponsor-backed deal value is up 37%. Why it matters: the Italian market is made of many small deals, exactly the ground for an SME marketplace.",s:"BCG",u:"https://www.bcg.com/press/2october2026-m-a-valore-globale-15-in-italia-numero-record-di-operazioni"}]}]};
+const CASES={
+it:[
+ {title:"CMD: dal riacquisto dai cinesi alla vendita dell'80% a EDGE in nove mesi",tags:["Industriale","Basilicata e Campania","Strategico estero","80% + minoranza"],
+  p:["CMD, Costruzioni Motori Diesel, produce sistemi di propulsione per auto, aerei e imbarcazioni, con stabilimento ad Atella (Potenza) e ricerca a San Nicola La Strada (Caserta). Nel 2025 ha fatturato circa 40 milioni con 5 di EBITDA e 26,5 di debito netto: un'azienda tecnica, indebitata, con un mercato storico (l'automotive) sotto pressione.",
+     "A gennaio 2026 la famiglia Negri, discendente dei fondatori, riacquista il 67% detenuto dal gruppo cinese Loncin Motor e torna al 100%. A maggio firma un accordo preliminare con EDGE, conglomerato della difesa controllato da Abu Dhabi, e il 27 ottobre chiude: EDGE prende l'80%, la famiglia tiene il 20% e resta nella guida. EDGE vuole fare di CMD un polo europeo della propulsione, in particolare per i velivoli senza pilota, e tratta già commesse da chiudere entro l'anno.",
+     "Il prezzo non è stato reso noto. Il punto non è il multiplo: è la sequenza. Riacquistare il controllo è servito a presentarsi al mercato con un'azienda di famiglia pulita e un solo interlocutore, non con un socio cinese al 67% da gestire in trattativa. Nove mesi dopo, la stessa famiglia cede la maggioranza a un compratore strategico che porta mercato (difesa) e capitale, tenendo una quota che vale di più se il piano funziona."],
+  lesson:"Per chi vende: semplificare la compagine prima di andare sul mercato può valere più di qualsiasi negoziazione sul prezzo. Un compratore strategico paga per il mercato che porta, non solo per i numeri di oggi; tenere una minoranza è il modo per partecipare a quel valore.",s:"BeBeez, 27 ottobre 2026",u:"https://bebeez.it/ma-e-corporate-finance/il-gruppo-emiratino-edge-chiude-lacquisizione-dell80-di-cmd-dalla-famiglia-negri-che-rimane-col-20/"},
+ {title:"Nethive: secondary buyout con i fondatori che reinvestono e un add-on al closing",tags:["Software e cybersecurity","Padova","Fondo a fondo","Rollover"],
+  p:["Nethive è una società di cybersecurity di Padova. Nel 2021 il fondo Alcedo IV ne compra il 53%, lasciando ai fondatori Alessandro Bellato e Diego Rocco il resto e la guida operativa. Cinque anni dopo, il 23 ottobre 2026, Alcedo cede la maggioranza a Bregal Milestone, fondo europeo specializzato in software.",
+     "Tre elementi rendono l'operazione un modello. I fondatori reinvestono nella nuova struttura e restano co-amministratori delegati: il compratore paga anche per la continuità. Nel giorno stesso del closing Nethive acquisisce JoyComm, società romana dello stesso settore: il nuovo fondo entra con un add-on già pronto, segno che il piano buy-and-build è stato preparato durante la trattativa. E Alcedo, uscendo, annuncia il fondo VI da 300 milioni: l'exit alimenta la raccolta successiva.",
+     "Valore e quote esatte non sono pubblici. Quello che si vede è il ciclo completo del private equity nelle PMI: ingresso di un fondo che professionalizza, cinque anni di crescita, passaggio a un fondo più grande e specializzato, fondatori che restano soci due volte."],
+  lesson:"Per chi vende a un fondo: il reinvestimento non è una concessione ma una leva. Chi resta socio con il secondo fondo incassa due volte, e un add-on pronto al closing alza il valore percepito dell'intera piattaforma.",s:"BeBeez, 23 ottobre 2026",u:"https://bebeez.it/private-equity/alcedo-iv-cede-la-maggioranza-della-cybersecurity-nethive-a-bregal-milestone-prepara-il-fondo-vi-da-300-mln-i-fondatori-reinvestono"}],
+en:[
+ {title:"CMD: from buying back the Chinese stake to selling 80% to EDGE in nine months",tags:["Industrial","Basilicata and Campania","Foreign strategic","80% + minority"],
+  p:["CMD, Costruzioni Motori Diesel, makes propulsion systems for cars, aircraft and boats, with a plant in Atella (Potenza) and R&D in San Nicola La Strada (Caserta). In 2025 it had about €40m revenue, €5m EBITDA and €26.5m net debt: a technical, leveraged company whose historic market (automotive) is under pressure.",
+     "In January 2026 the Negri family, descendants of the founders, buys back the 67% held by China's Loncin Motor and returns to 100%. In May it signs a preliminary agreement with EDGE, the Abu Dhabi-controlled defence group, and on 27 October it closes: EDGE takes 80%, the family keeps 20% and stays in management. EDGE wants CMD to become a European propulsion hub, notably for unmanned aircraft, and is already negotiating orders to close by year end.",
+     "The price was not disclosed. The point is not the multiple, it is the sequence. Buying back control meant going to market as a clean family company with one counterparty, not with a 67% Chinese shareholder to manage during negotiations. Nine months later the same family sells control to a strategic buyer who brings a market (defence) and capital, keeping a stake worth more if the plan works."],
+  lesson:"For sellers: simplifying the shareholder base before going to market can be worth more than any price negotiation. A strategic buyer pays for the market it brings, not only for today's numbers; keeping a minority is how you share in that value.",s:"BeBeez, 27 October 2026",u:"https://bebeez.it/ma-e-corporate-finance/il-gruppo-emiratino-edge-chiude-lacquisizione-dell80-di-cmd-dalla-famiglia-negri-che-rimane-col-20/"},
+ {title:"Nethive: a secondary buyout with founder rollover and an add-on at closing",tags:["Software and cybersecurity","Padua","Fund to fund","Rollover"],
+  p:["Nethive is a cybersecurity company based in Padua. In 2021 the Alcedo IV fund buys 53%, leaving founders Alessandro Bellato and Diego Rocco the rest and day-to-day leadership. Five years later, on 23 October 2026, Alcedo sells its majority to Bregal Milestone, a European software-focused fund.",
+     "Three elements make it a model. The founders reinvest in the new structure and stay co-CEOs: the buyer pays for continuity too. On closing day Nethive acquires JoyComm, a Rome-based peer: the new fund enters with an add-on already lined up, a sign the buy-and-build plan was prepared during the negotiation. And Alcedo, on exit, announces its €300m Fund VI: the exit feeds the next fundraising.",
+     "Value and exact stakes are not public. What is visible is the full private equity cycle in SMEs: a fund enters and professionalises, five years of growth, hand-over to a larger specialised fund, founders who stay shareholders twice."],
+  lesson:"For those selling to a fund: reinvestment is not a concession but a lever. Staying a shareholder alongside the second fund means cashing in twice, and an add-on ready at closing raises the perceived value of the whole platform.",s:"BeBeez, 23 October 2026",u:"https://bebeez.it/private-equity/alcedo-iv-cede-la-maggioranza-della-cybersecurity-nethive-a-bregal-milestone-prepara-il-fondo-vi-da-300-mln-i-fondatori-reinvestono"}]};
+
 let L="it";
 try{const s=localStorage.getItem("naviros-lang");if(s==="en"||s==="it")L=s}catch(e){}
 const $=s=>document.querySelector(s);
@@ -549,7 +624,7 @@ function articleCard(a,short){
 let openArtId=null;
 function openArticle(id,go){
   const a=ARTICLES[L].find(x=>x.id===id);if(!a)return;openArtId=id;
-  if(go)location.hash="insight";
+  if(go){location.hash="insight";showPane("guides")}
   const r=$("#reader");r.hidden=false;
   r.innerHTML=`<div class="row" style="justify-content:space-between"><span class="by eyebrow">${a.date} · ${a.by}</span><button class="x" type="button" id="closeArt">${t("close")}</button></div><h2>${a.title}</h2>${a.body.map(p=>`<p>${p}</p>`).join("")}`;
   $("#closeArt").onclick=()=>{r.hidden=true;openArtId=null};
@@ -580,6 +655,8 @@ function render(){
   $("#home-deals").innerHTML="";DEALS.forEach(d=>$("#home-deals").append(dealCard(d)));
   $("#home-articles").innerHTML="";ARTICLES[L].slice(0,3).forEach(a=>$("#home-articles").append(articleCard(a,true)));
   $("#all-articles").innerHTML="";ARTICLES[L].forEach(a=>$("#all-articles").append(articleCard(a,false)));
+  $("#news").innerHTML=NEWS[L].map(d=>`<div class="day"><span class="d">${d.d}</span><ul>${d.items.map(i=>`<li><b>${i.t}</b><span>${i.b}</span><a href="${i.u}" target="_blank" rel="noopener">${t("src")}: ${i.s} ↗</a></li>`).join("")}</ul></div>`).join("");
+  $("#cases").innerHTML=CASES[L].map(c=>`<div class="case"><h3>${c.title}</h3><div class="kv">${c.tags.map(x=>`<span class="chip">${x}</span>`).join("")}</div>${c.p.map(x=>`<p>${x}</p>`).join("")}<p class="lesson">${c.lesson}</p><a href="${c.u}" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:.72rem;color:var(--muted)">${t("src")}: ${c.s} ↗</a></div>`).join("");
   $("#weekly").innerHTML=WEEKLY[L].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
   $("#steps").innerHTML=STEPS[L].map(s=>`<div class="step"><span class="eyebrow">${s[0]}</span><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join("");
   const li=a=>a.map(x=>`<li><b>${x[0]}</b><span>${x[1]}</span></li>`).join("");
@@ -605,6 +682,10 @@ function route(){
   document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r===h));
 }
 window.addEventListener("hashchange",route);
+let PANE="news";
+function showPane(p){PANE=p;document.querySelectorAll(".pane").forEach(x=>x.hidden=x.id!=="p-"+p);document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.p===p))}
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>showPane(b.dataset.p)));
+showPane("news");
 
 $("#form").addEventListener("submit",e=>{e.preventDefault();$("#ok").hidden=false;$("#ok").scrollIntoView({block:"nearest"})});
 $("#copy").addEventListener("click",()=>{const txt="deals@naviros.it";const done=()=>{$("#copy").textContent=t("copied");setTimeout(()=>$("#copy").textContent=t("copy"),1500)};

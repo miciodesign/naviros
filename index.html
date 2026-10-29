@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Naviros: opportunità di cessione e acquisizione di aziende italiane, insight sul mercato M&A, advisory e academy. Companies. Capital. Deals.">
+<meta property="og:title" content="Naviros · Deals, Insight, Advisory & Academy">
+<meta property="og:description" content="Opportunità M&A verificate, analisi di mercato e formazione per imprenditori e investitori.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E5A49'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='white' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+<style>:root{padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Naviros</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: ledger-style bilingual portal. Sticky top bar with IT/EN switch, hash-routed views, dealbook list with filters, editorial insight, advisory with practical rules, glossary. */
+:root{
+  --bg:#F6F7F4; --surface:#FFFFFF; --fg:#151B21; --muted:#5E6A70; --line:#D9DED8;
+  --accent:#0E5A49; --accent-ink:#FFFFFF; --accent-soft:#E3EFEA;
+  --tag:#EEF1EC; --warn:#9A5B0C; --warn-soft:#F7ECD9;
+  --display:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F1416; --surface:#171D20; --fg:#E9EDEA; --muted:#9AA6A8; --line:#2A3337;
+  --accent:#5FB89E; --accent-ink:#0F1416; --accent-soft:#17302A;
+  --tag:#1F272B; --warn:#E0A24B; --warn-soft:#30250F; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0F1416; --surface:#171D20; --fg:#E9EDEA; --muted:#9AA6A8; --line:#2A3337;
+  --accent:#5FB89E; --accent-ink:#0F1416; --accent-soft:#17302A;
+  --tag:#1F272B; --warn:#E0A24B; --warn-soft:#30250F; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.4rem,7vw,4.4rem)}
+h2{font-size:clamp(1.7rem,4vw,2.5rem)}
+h3{font-size:1.35rem}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.lead{color:var(--muted);max-width:40rem}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:14px;padding-block:12px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-size:1.6rem;text-decoration:none;display:flex;align-items:baseline;gap:8px}
+.brand small{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--muted)}
+nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+nav a{text-decoration:none;font-size:.88rem;padding:6px 9px;border-radius:999px;color:var(--muted)}
+nav a.on{background:var(--accent-soft);color:var(--accent)}
+nav a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tools{display:flex;gap:8px;align-items:center}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-family:var(--mono);font-size:.72rem;padding:5px 10px;border:0;background:var(--surface);color:var(--muted);cursor:pointer}
+.lang button.on{background:var(--accent);color:var(--accent-ink)}
+.demo{display:inline-flex;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);padding:5px 10px;border-radius:999px}
+
+main .wrap{padding-block:40px 72px}
+.view[hidden]{display:none}
+
+.hero{display:grid;gap:28px;grid-template-columns:1.3fr 1fr;align-items:end;padding-bottom:40px;border-bottom:1px solid var(--line)}
+.hero p.lead{font-size:1.15rem;max-width:36rem;margin-top:16px}
+.ticker{font-family:var(--mono);font-size:.82rem;border:1px solid var(--line);background:var(--surface);padding:16px 18px;min-width:0}
+.ticker div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.ticker div:last-child{border-bottom:0}
+.ticker span:last-child{color:var(--accent)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:500;padding:11px 18px;border-radius:4px;border:0;cursor:pointer;font-size:.95rem;font-family:var(--body)}
+.cta.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.mt{margin-top:22px}
+
+section{margin-top:44px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.sec-head a{font-size:.9rem;color:var(--accent)}
+
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.filters label{display:flex;flex-direction:column;gap:4px;font-size:.75rem;color:var(--muted);min-width:0}
+.filters select,.filters input{font:inherit;font-size:.9rem;padding:8px 10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:4px;width:100%}
+.count{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-bottom:12px}
+
+.deals{display:grid;gap:10px}
+.deal{background:var(--surface);border:1px solid var(--line);padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:start;text-align:left;width:100%;color:inherit;font:inherit;cursor:pointer;border-radius:3px}
+.deal:hover{border-color:var(--accent)}
+.code{font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:3px;min-width:5.2em}
+.deal .t{min-width:0}
+.deal h3{font-family:var(--body);font-weight:600;font-size:1rem}
+.deal .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:.72rem;background:var(--tag);padding:3px 8px;border-radius:3px;color:var(--muted)}
+.chip.side{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.kpi{text-align:right;font-family:var(--mono);font-size:.8rem;white-space:nowrap}
+.kpi b{display:block;font-size:1.05rem;font-weight:500;color:var(--fg)}
+.kpi span{color:var(--muted)}
+.empty{padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line)}
+
+.detail{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);padding:22px;margin-bottom:22px;display:grid;gap:16px}
+.detail[hidden]{display:none}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.grid4 div{border-top:1px solid var(--line);padding-top:8px}
+.grid4 small{display:block;font-size:.72rem;color:var(--muted)}
+.grid4 b{font-family:var(--mono);font-weight:500}
+.lock{font-size:.85rem;color:var(--muted);border:1px dashed var(--line);padding:12px 14px}
+.x{background:none;border:0;color:var(--muted);cursor:pointer;font:inherit;font-size:.85rem;padding:0;text-decoration:underline}
+
+.feat{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start}
+.article{display:grid;gap:10px;padding:18px 0;border-top:1px solid var(--line);text-align:left;width:100%;background:none;border-left:0;border-right:0;border-bottom:0;color:inherit;font:inherit;cursor:pointer}
+.article:hover h3{color:var(--accent)}
+.article h3{font-family:var(--display);font-size:1.5rem}
+.article p{color:var(--muted);max-width:38rem}
+.article .by{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.list{display:grid}
+.reader{background:var(--surface);border:1px solid var(--line);padding:28px 24px;display:grid;gap:16px}
+.reader[hidden]{display:none}
+.reader p{max-width:38rem;font-size:1.02rem}
+.reader h2{font-size:2rem}
+.weekly{background:var(--accent);color:var(--accent-ink);padding:22px;display:grid;gap:12px;border-radius:3px}
+.weekly .eyebrow{color:inherit;opacity:.8}
+.weekly table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8rem}
+.weekly td{padding:7px 0;border-top:1px solid rgba(255,255,255,.25);vertical-align:top}
+.weekly td:last-child{text-align:right;white-space:nowrap}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.step{border-top:2px solid var(--accent);padding-top:12px}
+.step .eyebrow{color:var(--accent)}
+.step p{color:var(--muted);font-size:.92rem;margin-top:6px}
+.advice{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.advice ol{margin:12px 0 0;padding-left:1.3em;display:grid;gap:10px}
+.advice li b{font-weight:600}
+.advice li span{display:block;color:var(--muted);font-size:.92rem}
+.advice .col{background:var(--surface);border:1px solid var(--line);padding:22px;min-width:0}
+.rules{margin-top:36px;border:1px solid var(--line);padding:22px;display:grid;gap:10px}
+.rules div{display:grid;grid-template-columns:auto 1fr;gap:12px;border-top:1px dashed var(--line);padding-top:10px}
+.rules div:first-of-type{border-top:0;padding-top:0}
+.rules .k{font-family:var(--mono);font-size:.78rem;color:var(--accent);min-width:7em;padding-top:3px}
+
+.academy{margin-top:44px}
+.mods{display:grid;gap:12px}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:3px}
+.mod summary{list-style:none;cursor:pointer;padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:baseline}
+.mod summary::-webkit-details-marker{display:none}
+.mod summary .n{font-family:var(--mono);font-size:.78rem;color:var(--accent)}
+.mod summary h3{font-family:var(--body);font-weight:600;font-size:1rem}
+.mod summary p{color:var(--muted);font-size:.9rem;margin-top:4px}
+.mod summary .st{font-family:var(--mono);font-size:.7rem;color:var(--muted);white-space:nowrap}
+.mod[open] summary{border-bottom:1px solid var(--line)}
+.mod .body{padding:6px 18px 20px;display:grid;gap:18px}
+.lesson h4{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:12px 0 6px}
+.lesson p{max-width:40rem;margin-top:8px}
+.lesson ul{margin:8px 0 0;padding-left:1.2em;max-width:40rem;display:grid;gap:4px}
+.outline{display:grid;gap:6px;margin:0;padding-left:1.2em;color:var(--muted)}
+.quiz{border-top:1px solid var(--line);padding-top:16px;display:grid;gap:14px}
+.q{display:grid;gap:8px}
+.q p{font-weight:500}
+.q .opts{display:grid;gap:6px}
+.q button{font:inherit;text-align:left;padding:8px 12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:4px;cursor:pointer}
+.q button.ok{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.q button.no{border-color:var(--warn);background:var(--warn-soft);color:var(--warn)}
+.q .why{font-size:.9rem;color:var(--muted)}
+.q .why[hidden]{display:none}
+.gloss{display:grid;gap:0}
+.gloss dt{font-family:var(--display);font-size:1.4rem;border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.gloss dt small{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-left:10px;letter-spacing:.08em;text-transform:uppercase}
+.gloss dd{margin:6px 0 0;max-width:42rem;color:var(--muted)}
+.gloss .cat{margin-top:34px}
+.gloss .cat:first-child{margin-top:0}
+
+form{display:grid;gap:12px;max-width:40rem}
+form label{display:grid;gap:4px;font-size:.8rem;color:var(--muted)}
+form input,form select,form textarea{font:inherit;font-size:.95rem;padding:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:4px;width:100%}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ok{background:var(--accent-soft);color:var(--accent);padding:14px;border-radius:4px}
+.ok[hidden]{display:none}
+.addr{font-family:var(--mono);font-size:.85rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.addr button{font:inherit;font-size:.75rem;padding:4px 10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:3px;cursor:pointer}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}
+footer .wrap{padding-block:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:760px){
+  .hero,.feat,.advice{grid-template-columns:1fr}
+  .deal{grid-template-columns:1fr}
+  .kpi{text-align:left}
+  .two{grid-template-columns:1fr}
+  nav{margin-left:0;width:100%}
+}
+@media (prefers-reduced-motion:no-preference){ .deal,nav a{transition:border-color .15s,background .15s} }
+</style>
+
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="#home">Naviros <small data-t="tag"></small></a>
+  <nav>
+    <a href="#opportunita" data-r="opportunita" data-t="n_opp"></a>
+    <a href="#insight" data-r="insight" data-t="n_ins"></a>
+    <a href="#advisory" data-r="advisory" data-t="n_adv"></a>
+    <a href="#glossario" data-r="glossario" data-t="n_glo"></a>
+    <a href="#contatti" data-r="contatti" data-t="n_con"></a>
+  </nav>
+  <div class="tools">
+    <div class="lang" role="group" aria-label="Lingua / Language"><button type="button" id="l-it">IT</button><button type="button" id="l-en">EN</button></div>
+    <span class="demo" data-t="demo"></span>
+  </div>
+</div></header>
+
+<main><div class="wrap">
+
+<div class="view" id="v-home">
+  <div class="hero">
+    <div>
+      <p class="eyebrow" data-t="h_eye"></p>
+      <h1 style="margin-top:10px" data-t="h_title"></h1>
+      <p class="lead" data-t="h_lead"></p>
+      <div class="row mt">
+        <a class="cta" href="#opportunita" data-t="h_cta1"></a>
+        <a class="cta ghost" href="#contatti" data-t="h_cta2"></a>
+      </div>
+    </div>
+    <div class="ticker">
+      <div><span data-t="t1"></span><span class="num">24</span></div>
+      <div><span data-t="t2"></span><span class="num">€ 312 mln</span></div>
+      <div><span data-t="t3"></span><span class="num">6,8×</span></div>
+      <div><span data-t="t4"></span><span class="num" data-t="t4v"></span></div>
+      <div><span data-t="t5"></span><span class="num">28.10.2026</span></div>
+    </div>
+  </div>
+  <section>
+    <div class="sec-head"><h2 data-t="s_feat"></h2><a href="#opportunita" data-t="s_all_opp"></a></div>
+    <div class="deals" id="home-deals"></div>
+  </section>
+  <section>
+    <div class="sec-head"><h2 data-t="s_ins"></h2><a href="#insight" data-t="s_all_ins"></a></div>
+    <div class="list" id="home-articles"></div>
+  </section>
+</div>
+
+<div class="view" id="v-opportunita" hidden>
+  <p class="eyebrow">Dealbook</p>
+  <h2 style="margin:8px 0 6px" data-t="o_title"></h2>
+  <p class="lead" style="margin-bottom:24px" data-t="o_lead"></p>
+  <div class="detail" id="detail" hidden></div>
+  <div class="filters">
+    <label><span data-t="f_side"></span><select id="f-side"></select></label>
+    <label><span data-t="f_sector"></span><select id="f-sector"></select></label>
+    <label><span data-t="f_area"></span><select id="f-area"></select></label>
+    <label><span data-t="f_rev"></span><input id="f-rev" type="number" min="0" step="1" placeholder="0"></label>
+    <label><span data-t="f_q"></span><input id="f-q" type="search"></label>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="deals" id="all-deals"></div>
+</div>
+
+<div class="view" id="v-insight" hidden>
+  <p class="eyebrow">Insight</p>
+  <h2 style="margin:8px 0 24px" data-t="i_title"></h2>
+  <div class="reader" id="reader" hidden></div>
+  <div class="feat">
+    <div class="list" id="all-articles"></div>
+    <aside class="weekly">
+      <span class="eyebrow" data-t="w_title"></span>
+      <table id="weekly"></table>
+      <span style="font-size:.78rem;opacity:.8" data-t="w_note"></span>
+    </aside>
+  </div>
+</div>
+
+<div class="view" id="v-advisory" hidden>
+  <p class="eyebrow">Advisory</p>
+  <h2 style="margin:8px 0 12px" data-t="a_title"></h2>
+  <p class="lead" style="margin-bottom:28px" data-t="a_lead"></p>
+  <div class="steps" id="steps"></div>
+  <section>
+    <div class="sec-head"><h2 data-t="a_adv_title"></h2></div>
+    <div class="advice">
+      <div class="col"><span class="eyebrow" data-t="a_sell"></span><ol id="sell"></ol></div>
+      <div class="col"><span class="eyebrow" data-t="a_buy"></span><ol id="buy"></ol></div>
+    </div>
+    <div class="rules"><span class="eyebrow" data-t="a_rules"></span><div id="rules" style="display:contents"></div></div>
+  </section>
+  <section class="academy">
+    <div class="sec-head"><h2 data-t="ac_title"></h2></div>
+    <p class="lead" style="margin-bottom:20px" data-t="ac_lead"></p>
+    <div class="mods" id="mods"></div>
+  </section>
+  <a class="cta mt" href="#contatti" data-t="a_cta"></a>
+</div>
+
+<div class="view" id="v-glossario" hidden>
+  <p class="eyebrow" data-t="g_eye"></p>
+  <h2 style="margin:8px 0 12px" data-t="g_title"></h2>
+  <p class="lead" style="margin-bottom:30px" data-t="g_lead"></p>
+  <div class="gloss" id="gloss"></div>
+</div>
+
+<div class="view" id="v-contatti" hidden>
+  <p class="eyebrow" data-t="n_con"></p>
+  <h2 style="margin:8px 0 12px" data-t="c_title"></h2>
+  <p class="lead" style="margin-bottom:24px" data-t="c_lead"></p>
+  <form id="form">
+    <div class="two">
+      <label><span data-t="c_name"></span><input id="c-name" required></label>
+      <label>Email<input id="c-email" type="email" required></label>
+    </div>
+    <div class="two">
+      <label><span data-t="c_co"></span><input id="c-co"></label>
+      <label><span data-t="c_int"></span><select id="c-type"></select></label>
+    </div>
+    <label><span data-t="c_msg"></span><textarea id="c-msg" rows="4"></textarea></label>
+    <div><button class="cta" type="submit" data-t="c_send"></button></div>
+    <div class="ok" id="ok" hidden data-t="c_ok"></div>
+  </form>
+  <div class="addr mt"><span>deals@naviros.it</span><button type="button" id="copy" data-t="copy"></button><span class="muted" data-t="c_addr"></span></div>
+</div>
+
+</div></main>
+
+<footer><div class="wrap">
+  <span data-t="f_l"></span>
+  <span data-t="f_r"></span>
+</div></footer>
+
+<script>
+const T={
+it:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunità",n_ins:"Insight",n_adv:"Advisory & Academy",n_glo:"Glossario",n_con:"Contatti",demo:"Dati dimostrativi",
+ h_eye:"Companies. Capital. Deals.",h_title:"Dove le aziende italiane cambiano proprietà.",h_lead:"Mandati di cessione e acquisizione verificati, anonimi fino alla firma dell'NDA, e un'analisi settimanale del mercato scritta da chi i deal li chiude.",h_cta1:"Vedi le opportunità",h_cta2:"Pubblica un mandato",
+ t1:"Mandati attivi",t2:"EV complessivo in listino",t3:"Multiplo mediano EV/EBITDA",t4:"Tempo mediano al closing",t4v:"7,5 mesi",t5:"Aggiornato",
+ s_feat:"In evidenza",s_all_opp:"Tutte le opportunità →",s_ins:"Ultimi insight",s_all_ins:"Tutti gli articoli →",
+ o_title:"Opportunità di cessione e acquisizione",o_lead:"Ogni scheda è anonima: il nome della società e il memorandum informativo sono accessibili solo dopo la firma dell'accordo di riservatezza.",
+ f_side:"Tipo di operazione",f_sector:"Settore",f_area:"Area",f_rev:"Fatturato minimo (€ mln)",f_q:"Cerca",f_q_ph:"es. packaging, Veneto, passaggio generazionale",all:"Tutte",allm:"Tutti",count:(a,b)=>`${a} opportunità su ${b}`,empty:"Nessuna opportunità con questi criteri. Prova ad allargare i filtri.",
+ rev:"fatturato",ebitda:"EBITDA",evr:"Range EV",area:"Area",lock:"Ragione sociale, bilanci e information memorandum disponibili dopo la firma dell'NDA.",nda:"Richiedi accesso (NDA)",close:"Chiudi",nd:"n.d.",
+ i_title:"Analisi, multipli e deal della settimana",w_title:"Deal della settimana · 20–26 ott 2026",w_note:"Operazioni di esempio a scopo dimostrativo.",
+ a_title:"Accompagniamo imprenditori e investitori dal primo incontro al closing.",a_lead:"Un'operazione di M&A dura in media sette-nove mesi e attraversa quattro fasi. Prima ancora di affidare un mandato, ci sono alcune regole di base che fanno la differenza tra un buon prezzo e una trattativa che si arena.",
+ ac_title:"Academy",ac_lead:"Un percorso gratuito in sei moduli per capire come funziona davvero un'operazione, dal primo incontro al giorno dopo il closing. Il modulo 1 è completo; gli altri sono in scrittura.",ac_done:"Completo",ac_soon:"In arrivo",ac_quiz:"Mettiti alla prova",ac_lessons:"Lezioni",
+ a_adv_title:"Consigli di base",a_sell:"Se vendi",a_buy:"Se compri",a_rules:"Regole che valgono per tutti",a_cta:"Richiedi una valutazione",
+ g_eye:"Glossario",g_title:"Le parole dell'M&A, spiegate in modo semplice",g_lead:"I termini che incontrerai nelle schede, nelle lettere di intenti e nei contratti. In ordine di apparizione in una trattativa tipica.",
+ c_title:"Pubblica un mandato o chiedi accesso a un'opportunità",c_lead:"Rispondiamo entro due giorni lavorativi. Tutte le richieste sono trattate in modo riservato.",c_name:"Nome e cognome",c_co:"Società",c_int:"Interesse",c_msg:"Messaggio",c_msg_ph:"Settore, dimensione, tempistiche, codice dell'opportunità se presente",c_send:"Invia richiesta",c_ok:"Richiesta registrata. In questa versione dimostrativa il modulo non invia email: scrivici direttamente all'indirizzo qui sotto.",c_addr:"Indirizzo di esempio",copy:"Copia",copied:"Copiato",c_opts:["Voglio cedere la mia azienda","Cerco aziende da acquisire","Accesso a un'opportunità specifica","Altro"],c_req:(id,t)=>`Richiesta di accesso all'opportunità ${id} – ${t}`,
+ f_l:"© 2026 Naviros · versione dimostrativa",f_r:"Le schede non costituiscono offerta al pubblico né sollecitazione all'investimento.",
+ sides:{Cessione:"Cessione",Acquisizione:"Acquisizione",Minoranza:"Minoranza"},mln:"mln"},
+en:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunities",n_ins:"Insight",n_adv:"Advisory & Academy",n_glo:"Glossary",n_con:"Contact",demo:"Sample data",
+ h_eye:"Companies. Capital. Deals.",h_title:"Where Italian companies change hands.",h_lead:"Verified sell-side and buy-side mandates, anonymous until the NDA is signed, and a weekly market read written by people who close deals.",h_cta1:"Browse opportunities",h_cta2:"List a mandate",
+ t1:"Active mandates",t2:"Total EV listed",t3:"Median EV/EBITDA multiple",t4:"Median time to closing",t4v:"7.5 months",t5:"Updated",
+ s_feat:"Featured",s_all_opp:"All opportunities →",s_ins:"Latest insight",s_all_ins:"All articles →",
+ o_title:"Sell-side and buy-side opportunities",o_lead:"Every listing is anonymous: the company name and the information memorandum are released only after a non-disclosure agreement is signed.",
+ f_side:"Deal type",f_sector:"Sector",f_area:"Region",f_rev:"Minimum revenue (€ m)",f_q:"Search",f_q_ph:"e.g. packaging, Veneto, succession",all:"All",allm:"All",count:(a,b)=>`${a} of ${b} opportunities`,empty:"No opportunities match these filters. Try widening them.",
+ rev:"revenue",ebitda:"EBITDA",evr:"EV range",area:"Region",lock:"Company name, financial statements and information memorandum are released after the NDA is signed.",nda:"Request access (NDA)",close:"Close",nd:"n/a",
+ i_title:"Analysis, multiples and deals of the week",w_title:"Deals of the week · 20–26 Oct 2026",w_note:"Sample transactions for demonstration purposes.",
+ a_title:"We walk owners and investors from the first meeting to closing.",a_lead:"An M&A process takes seven to nine months on average and moves through four phases. Before you even sign a mandate, a few basic rules separate a good price from a negotiation that stalls.",
+ ac_title:"Academy",ac_lead:"A free six-module path to understand how a deal really works, from the first meeting to the day after closing. Module 1 is complete; the others are being written.",ac_done:"Complete",ac_soon:"Coming soon",ac_quiz:"Test yourself",ac_lessons:"Lessons",
+ a_adv_title:"Basic advice",a_sell:"If you are selling",a_buy:"If you are buying",a_rules:"Rules that apply to everyone",a_cta:"Request a valuation",
+ g_eye:"Glossary",g_title:"The language of M&A, in plain words",g_lead:"The terms you will meet in listings, letters of intent and contracts, in the order they appear in a typical deal.",
+ c_title:"List a mandate or request access to an opportunity",c_lead:"We reply within two business days. Every request is treated confidentially.",c_name:"Full name",c_co:"Company",c_int:"Interest",c_msg:"Message",c_msg_ph:"Sector, size, timing, opportunity code if any",c_send:"Send request",c_ok:"Request recorded. In this demo the form does not send email: write to us directly at the address below.",c_addr:"Sample address",copy:"Copy",copied:"Copied",c_opts:["I want to sell my company","I am looking for companies to acquire","Access to a specific opportunity","Other"],c_req:(id,t)=>`Access request for opportunity ${id} – ${t}`,
+ f_l:"© 2026 Naviros · demo version",f_r:"Listings are not a public offer or a solicitation to invest.",
+ sides:{Cessione:"Sell-side",Acquisizione:"Buy-side",Minoranza:"Minority stake"},mln:"m"}
+};
+
+const DEALS=[
+ {id:"CES-041",side:"Cessione",sector:{it:"Packaging",en:"Packaging"},area:{it:"Veneto",en:"Veneto"},rev:28.5,ebitda:4.1,ev:"26–30",reason:{it:"Passaggio generazionale",en:"Succession"},title:{it:"Azienda di packaging flessibile per il food",en:"Flexible packaging company for the food sector"},desc:{it:"Tre linee di estrusione e stampa, 95 dipendenti, clientela diversificata nel largo consumo. Fondatore disponibile a un affiancamento di 18 mesi.",en:"Three extrusion and printing lines, 95 employees, diversified FMCG customer base. Founder available for an 18-month handover."}},
+ {id:"CES-038",side:"Cessione",sector:{it:"Software",en:"Software"},area:{it:"Lombardia",en:"Lombardy"},rev:6.2,ebitda:1.5,ev:"12–15",reason:{it:"Exit dei soci fondatori",en:"Founders' exit"},title:{it:"Software house per la logistica (SaaS, ARR 70%)",en:"Logistics software house (SaaS, 70% ARR)"},desc:{it:"Piattaforma gestionale per operatori 3PL, 140 clienti ricorrenti, churn annuo sotto il 5%. Team tecnico di 22 persone che resta in azienda.",en:"Management platform for 3PL operators, 140 recurring customers, annual churn under 5%. Technical team of 22 stays on."}},
+ {id:"ACQ-017",side:"Acquisizione",sector:{it:"Meccanica",en:"Engineering"},area:{it:"Nord Italia",en:"Northern Italy"},rev:10,ebitda:null,ev:"fino a 20",reason:{it:"Crescita per linee esterne",en:"External growth"},title:{it:"Gruppo meccanico cerca aziende di lavorazioni di precisione",en:"Engineering group seeks precision machining companies"},desc:{it:"Gruppo quotato con 180 mln di fatturato cerca target tra 10 e 40 mln, con EBITDA margin sopra il 12%, per integrare la filiera aerospace e medicale.",en:"Listed group with €180m revenue seeks targets between €10m and €40m, EBITDA margin above 12%, to integrate its aerospace and medical supply chain."}},
+ {id:"CES-035",side:"Cessione",sector:{it:"Sanità",en:"Healthcare"},area:{it:"Emilia-Romagna",en:"Emilia-Romagna"},rev:11.8,ebitda:2.3,ev:"16–19",reason:{it:"Aggregazione con operatore più grande",en:"Join a larger operator"},title:{it:"Catena di 6 cliniche odontoiatriche",en:"Chain of 6 dental clinics"},desc:{it:"Strutture di proprietà in 4 città, 48 poltrone, direzione sanitaria disponibile a restare. Target ideale per un buy-and-build.",en:"Owned premises in 4 cities, 48 chairs, medical director willing to stay. Ideal buy-and-build target."}},
+ {id:"MIN-009",side:"Minoranza",sector:{it:"Agroalimentare",en:"Food"},area:{it:"Emilia-Romagna",en:"Emilia-Romagna"},rev:14,ebitda:1.9,ev:"9–11",reason:{it:"Capitale per export",en:"Export capital"},title:{it:"Caseificio con DOP, ricerca socio al 35%",en:"PDO cheese dairy seeking a 35% partner"},desc:{it:"Produzione certificata, export al 30% del fatturato in crescita. Il socio di minoranza finanzia un nuovo stabilimento di stagionatura.",en:"Certified production, exports at 30% of revenue and growing. The minority partner funds a new ageing facility."}},
+ {id:"CES-033",side:"Cessione",sector:{it:"Energia",en:"Energy"},area:{it:"Piemonte",en:"Piedmont"},rev:19.3,ebitda:2.6,ev:"13–16",reason:{it:"Pensionamento del titolare",en:"Owner retiring"},title:{it:"Impresa di impianti elettrici e fotovoltaici industriali",en:"Industrial electrical and solar installation contractor"},desc:{it:"Portafoglio ordini di 14 mesi, 60 tecnici, certificazioni SOA. Seconda linea manageriale già operativa.",en:"14-month order book, 60 technicians, public-works certifications. Second management line already in place."}},
+ {id:"ACQ-015",side:"Acquisizione",sector:{it:"Arredo",en:"Furniture"},area:{it:"Italia",en:"Italy"},rev:8,ebitda:null,ev:"10–40",reason:{it:"Investimento di lungo periodo",en:"Long-term investment"},title:{it:"Family office cerca aziende di arredo e design",en:"Family office seeks furniture and design companies"},desc:{it:"Orizzonte di oltre 10 anni, nessuna leva aggressiva, disponibilità a mantenere il marchio e il management.",en:"Horizon over 10 years, no aggressive leverage, willing to keep brand and management."}},
+ {id:"CES-030",side:"Cessione",sector:{it:"Servizi",en:"Services"},area:{it:"Toscana",en:"Tuscany"},rev:4.4,ebitda:0.9,ev:"5–6",reason:{it:"Cambio di attività dei soci",en:"Owners changing business"},title:{it:"Laboratorio di analisi ambientali accreditato",en:"Accredited environmental testing laboratory"},desc:{it:"Accreditamento ACCREDIA su 180 prove, contratti pluriennali con enti pubblici e utility.",en:"Accredited for 180 tests, multi-year contracts with public bodies and utilities."}},
+ {id:"CES-028",side:"Cessione",sector:{it:"Retail",en:"Retail"},area:{it:"Lazio",en:"Lazio"},rev:9.6,ebitda:1.1,ev:"6–8",reason:{it:"Ricerca di un partner industriale",en:"Seeking an industrial partner"},title:{it:"E-commerce di ricambi auto con magazzino proprietario",en:"Car-parts e-commerce with own warehouse"},desc:{it:"Marketplace proprietario e presenza sui principali canali, 85.000 referenze a stock, logistica interna.",en:"Own marketplace plus major channels, 85,000 SKUs in stock, in-house logistics."}},
+ {id:"MIN-008",side:"Minoranza",sector:{it:"Software",en:"Software"},area:{it:"Lombardia",en:"Lombardy"},rev:2.1,ebitda:-0.6,ev:"18–22",reason:{it:"Crescita",en:"Growth"},title:{it:"Fintech per il factoring alle PMI, round da 4 mln",en:"SME factoring fintech, €4m round"},desc:{it:"Erogato di 60 mln nei 12 mesi, licenza come agente di istituto finanziario, cerca investitori strategici o fondi.",en:"€60m funded in the last 12 months, licensed financial agent, seeking strategic investors or funds."}},
+];
+
+const ARTICLES={
+it:[
+ {id:"multipli",date:"27 ott 2026",by:"Analisi di mercato",title:"Multipli del mid-market italiano: terzo trimestre 2026",sum:"Il mediano EV/EBITDA scende a 6,8× sulle operazioni sotto i 50 milioni. Il software tiene, la meccanica tradizionale paga il costo del denaro.",body:["Nel terzo trimestre del 2026 abbiamo tracciato 61 operazioni con valore d'impresa compreso tra 5 e 50 milioni di euro. Il multiplo mediano EV/EBITDA si attesta a 6,8 volte, in calo rispetto alle 7,2 volte del trimestre precedente.","La dispersione resta ampia: il software con ricavi ricorrenti chiude tra 9 e 12 volte, mentre la meccanica conto terzi senza prodotto proprio si ferma tra 4,5 e 6 volte. Gli acquirenti industriali continuano a pagare un premio rispetto ai fondi quando il target porta competenze di processo difficili da replicare.","Per chi vende, la lezione pratica è che la qualità dell'EBITDA conta più del livello: ricavi ricorrenti, concentrazione dei clienti sotto il 20% e una seconda linea manageriale spostano il multiplo di un punto pieno."]},
+ {id:"earnout",date:"21 ott 2026",by:"Guida pratica",title:"Earn-out: come strutturarlo senza litigare dopo il closing",sum:"Il differimento del prezzo è utile quando le aspettative divergono, ma solo se la metrica è misurabile e non manipolabile.",body:["L'earn-out lega una parte del prezzo ai risultati futuri dell'azienda. Funziona quando venditore e acquirente hanno visioni diverse sul futuro ma vogliono comunque chiudere.","Tre regole che vediamo rispettate nei casi che finiscono bene: una sola metrica, di norma EBITDA o fatturato, definita nel contratto con le stesse regole contabili usate in due diligence; un orizzonte di 12 o 24 mesi, mai di più; e clausole di protezione per il venditore su cambi di perimetro, costi di gruppo allocati e decisioni che l'acquirente prende unilateralmente.","Quando il venditore resta in azienda, l'earn-out va tenuto distinto dal compenso da amministratore, altrimenti il trattamento fiscale si complica."]},
+ {id:"succ",date:"14 ott 2026",by:"Scenario",title:"Il passaggio generazionale è il primo motore dell'M&A italiano",sum:"Oltre la metà dei mandati di cessione sotto i 30 milioni nasce da un fondatore senza successione.",body:["Nei mandati che abbiamo seguito negli ultimi due anni, il 54% delle cessioni di aziende sotto i 30 milioni di valore ha come motivazione principale l'assenza di un successore in famiglia.","Queste aziende arrivano sul mercato con un tratto comune: l'imprenditore è ancora il centro delle relazioni commerciali e delle decisioni. Gli acquirenti lo scontano con un prezzo più basso o con un earn-out lungo.","Il lavoro di preparazione, iniziato idealmente due o tre anni prima, consiste nel rendere l'azienda vendibile senza il fondatore: deleghe formali, procedure documentate, contratti intestati alla società e non alla persona."]},
+ {id:"dd",date:"7 ott 2026",by:"Guida pratica",title:"Due diligence: i cinque documenti che fanno saltare le trattative",sum:"Contratti non rinnovati, TFR non accantonato, contenziosi non dichiarati. Un controllo preventivo evita sorprese a trattativa avanzata.",body:["La maggior parte delle rinegoziazioni di prezzo in due diligence nasce da cinque aree: contratti con i clienti principali scaduti o senza clausola di cambio di controllo; accantonamenti del personale incompleti; contenziosi fiscali o del lavoro non emersi nel teaser; immobili strumentali con difformità edilizie; crediti commerciali vecchi di oltre 180 giorni.","Una vendor due diligence leggera, fatta prima di andare sul mercato, costa una frazione dello sconto che l'acquirente chiederà trovando questi problemi da solo."]}],
+en:[
+ {id:"multipli",date:"27 Oct 2026",by:"Market analysis",title:"Italian mid-market multiples: third quarter 2026",sum:"The median EV/EBITDA falls to 6.8× on deals under €50m. Software holds up, traditional engineering pays for the cost of money.",body:["In the third quarter of 2026 we tracked 61 transactions with enterprise value between €5m and €50m. The median EV/EBITDA multiple came in at 6.8×, down from 7.2× the previous quarter.","Dispersion stays wide: software with recurring revenue closes between 9× and 12×, while contract engineering without a proprietary product stops between 4.5× and 6×. Strategic buyers keep paying a premium over funds when the target brings process know-how that is hard to replicate.","For sellers, the practical lesson is that the quality of EBITDA matters more than its level: recurring revenue, customer concentration below 20% and a second management line move the multiple by a full turn."]},
+ {id:"earnout",date:"21 Oct 2026",by:"Practical guide",title:"Earn-outs: how to structure one without a fight after closing",sum:"Deferring part of the price helps when expectations diverge, but only if the metric is measurable and hard to game.",body:["An earn-out ties part of the price to the company's future results. It works when seller and buyer see the future differently but still want to close.","Three rules we see in the cases that end well: one metric only, usually EBITDA or revenue, defined in the contract with the same accounting rules used in due diligence; a 12- or 24-month horizon, never longer; and seller protections on changes of scope, allocated group costs and decisions the buyer takes alone.","When the seller stays in the business, the earn-out must be kept separate from any director's pay, or the tax treatment gets complicated."]},
+ {id:"succ",date:"14 Oct 2026",by:"Scenario",title:"Succession is the main engine of Italian M&A",sum:"More than half of sell-side mandates under €30m start with a founder who has no successor.",body:["Across the mandates we followed in the last two years, 54% of sales of companies valued under €30m had the lack of a family successor as the main reason.","These companies reach the market with one trait in common: the owner is still the hub of commercial relationships and decisions. Buyers discount that with a lower price or a long earn-out.","Preparation, ideally started two or three years earlier, means making the company saleable without the founder: formal delegations, documented procedures, contracts in the company's name rather than the person's."]},
+ {id:"dd",date:"7 Oct 2026",by:"Practical guide",title:"Due diligence: the five documents that break deals",sum:"Unrenewed contracts, unfunded severance, undisclosed litigation. A preliminary check avoids surprises late in the negotiation.",body:["Most price renegotiations in due diligence come from five areas: contracts with key customers that have expired or lack a change-of-control clause; incomplete employee provisions; tax or labour disputes not disclosed in the teaser; operating property with building irregularities; receivables older than 180 days.","A light vendor due diligence, done before going to market, costs a fraction of the discount a buyer will ask for after finding these issues alone."]}]
+};
+
+const WEEKLY={
+it:[["Gruppo industriale lombardo acquisisce produttore di valvole (BS)","EV ≈ € 48 mln"],["Fondo di private equity entra al 60% in catena di cliniche odontoiatriche","n.d."],["Cessione di software house per il retail a gruppo francese","EV ≈ € 22 mln"],["Passaggio generazionale assistito, caseificio in Emilia (minoranza al 35%)","EV ≈ € 9 mln"]],
+en:[["Lombardy industrial group acquires valve maker (Brescia)","EV ≈ €48m"],["Private equity fund takes 60% of a dental clinic chain","n/a"],["Retail software house sold to French group","EV ≈ €22m"],["Assisted succession, Emilia dairy (35% minority)","EV ≈ €9m"]]};
+
+const STEPS={
+it:[["1 · Valutazione","Analisi preliminare","Normalizzazione dell'EBITDA, posizione finanziaria netta, range di valore con multipli di mercato e DCF."],["2 · Preparazione","Teaser e information memorandum","Profilo anonimo per il mercato, data room, lista lunga e corta delle controparti."],["3 · Negoziazione","Offerte e LOI","Raccolta delle offerte non vincolanti, selezione, lettera di intenti con esclusiva."],["4 · Closing","Due diligence e SPA","Coordinamento della due diligence, contratto di compravendita, earn-out e garanzie."]],
+en:[["1 · Valuation","Preliminary analysis","EBITDA normalisation, net financial position, value range from market multiples and DCF."],["2 · Preparation","Teaser and information memorandum","Anonymous market profile, data room, long and short list of counterparties."],["3 · Negotiation","Offers and LOI","Non-binding offers, selection, letter of intent with exclusivity."],["4 · Closing","Due diligence and SPA","Due diligence coordination, sale and purchase agreement, earn-out and warranties."]]};
+
+const SELL={
+it:[["Inizia due o tre anni prima.","Il prezzo lo fanno i bilanci degli ultimi tre esercizi, non quello dell'anno in cui decidi di vendere. Pulisci i costi personali, chiudi le partite sospese, formalizza i contratti."],["Rendi l'azienda vendibile senza di te.","Se ogni cliente chiama il titolare, l'acquirente paga meno o ti lega con un earn-out lungo. Costruisci una seconda linea e delega per iscritto."],["Conosci il tuo EBITDA normalizzato.","È la base di ogni multiplo. Compenso dell'amministratore a valori di mercato, affitti infragruppo, costi non ricorrenti: tutto va rettificato prima che lo faccia la controparte."],["Non trattare con un solo compratore.","Una procedura competitiva, anche con tre o quattro soggetti, è il modo più semplice per difendere il prezzo e le condizioni."],["Fai una vendor due diligence leggera.","Scopri tu i problemi prima dell'acquirente. Ogni sorpresa in due diligence costa in media più di quanto sarebbe costato sistemarla."]],
+en:[["Start two or three years ahead.","Price is set by the last three years of accounts, not by the year you decide to sell. Clean up personal costs, close open items, formalise contracts."],["Make the company saleable without you.","If every customer calls the owner, the buyer pays less or ties you to a long earn-out. Build a second line and delegate in writing."],["Know your normalised EBITDA.","It is the base of every multiple. Director's pay at market rates, intra-group rents, one-off costs: adjust everything before the other side does."],["Never negotiate with one buyer only.","A competitive process, even with three or four parties, is the simplest way to defend price and terms."],["Run a light vendor due diligence.","Find the problems before the buyer does. Every surprise in due diligence costs on average more than fixing it would have."]]};
+
+const BUY={
+it:[["Scrivi prima i criteri, poi cerca.","Settore, dimensione, area, multiplo massimo, cosa deve restare del management. Senza criteri scritti ogni dossier sembra interessante."],["Guarda la cassa, non solo l'EBITDA.","Capitale circolante, investimenti di mantenimento, debiti fuori bilancio. Il prezzo si paga con la cassa che l'azienda genera davvero."],["Verifica la concentrazione.","Un cliente sopra il 25% del fatturato o un fornitore insostituibile è un rischio che va riflesso nel prezzo o nelle garanzie."],["Usa la LOI per fissare le regole del gioco.","Prezzo, perimetro, esclusiva, tempi della due diligence e meccanismo di aggiustamento prezzo vanno chiariti prima di spendere in consulenti."],["Pianifica il giorno dopo.","La maggior parte del valore si perde nei primi dodici mesi dopo il closing. Il piano di integrazione si scrive durante la due diligence, non dopo."]],
+en:[["Write the criteria first, then search.","Sector, size, region, maximum multiple, which managers must stay. Without written criteria every file looks interesting."],["Look at cash, not only EBITDA.","Working capital, maintenance capex, off-balance-sheet debt. The price is paid with the cash the business really generates."],["Check concentration.","One customer above 25% of revenue or an irreplaceable supplier is a risk that belongs in the price or in the warranties."],["Use the LOI to set the rules.","Price, scope, exclusivity, due diligence timing and the price-adjustment mechanism must be clear before you spend on advisers."],["Plan the day after.","Most value is lost in the first twelve months after closing. The integration plan is written during due diligence, not afterwards."]]};
+
+const RULES={
+it:[["Riservatezza","Nessun nome circola prima dell'NDA. Una voce sul mercato può costare clienti e dipendenti prima ancora che l'operazione esista."],["Tempi","Sette-nove mesi è la norma. Chi promette un closing in tre mesi o non conosce il processo o non ha intenzione di rispettarlo."],["Consulenti","Advisor finanziario, avvocato e fiscalista sono tre ruoli diversi. Serve almeno chi coordina gli altri due."],["Prezzo","Il prezzo finale non è il numero della LOI: è quel numero meno gli aggiustamenti per debito, cassa e capitale circolante. Impara a leggere la formula."],["Firma","Il contratto si negozia prima della due diligence, non dopo. Chi arriva al contratto senza alternative ha già perso leva."]],
+en:[["Confidentiality","No name circulates before the NDA. A rumour in the market can cost customers and staff before the deal even exists."],["Timing","Seven to nine months is the norm. Anyone promising a closing in three months either does not know the process or does not intend to keep the promise."],["Advisers","Financial adviser, lawyer and tax adviser are three different roles. At least one of them must coordinate the other two."],["Price","The final price is not the LOI number: it is that number minus adjustments for debt, cash and working capital. Learn to read the formula."],["Signing","The contract is negotiated before due diligence, not after. Reaching the contract with no alternatives means leverage is already gone."]]};
+
+const GLOSS={
+it:[["Prima del mandato",[
+ ["Mandato","Mandate","Incarico scritto con cui l'imprenditore affida all'advisor la ricerca di compratori (sell-side) o di aziende da acquisire (buy-side). Definisce durata, esclusiva e commissioni."],
+ ["Enterprise Value (EV)","","Valore dell'azienda nel suo complesso, indipendente da come è finanziata. È il numero su cui si ragiona con i multipli."],
+ ["Equity Value","","Quanto incassa davvero il venditore: EV meno il debito finanziario netto. Se l'azienda ha cassa in eccesso, si aggiunge."],
+ ["EBITDA","","Margine operativo lordo: utile prima di interessi, imposte, ammortamenti e svalutazioni. Misura la cassa generata dalla gestione ordinaria."],
+ ["EBITDA normalizzato","Adjusted EBITDA","L'EBITDA rettificato dai costi e ricavi non ricorrenti o non di mercato: compenso del titolare, affitti infragruppo, spese personali. È quello che si moltiplica."],
+ ["Multiplo","Multiple","Rapporto tra EV e una grandezza economica, di solito l'EBITDA. Un'azienda con 2 milioni di EBITDA venduta a 6× ha un EV di 12 milioni."],
+ ["Posizione finanziaria netta (PFN)","Net debt","Debiti finanziari meno cassa e disponibilità. Fa da ponte tra EV ed equity value."],
+ ["Capitale circolante netto","Net working capital (NWC)","Crediti più magazzino meno debiti verso fornitori. Al closing si confronta con un livello normale concordato: se è più basso, il prezzo scende."],
+ ["DCF","Discounted cash flow","Metodo che valuta l'azienda attualizzando i flussi di cassa futuri. Più teorico dei multipli, si usa per confermare il range o per aziende in forte crescita."]]],
+ ["Sul mercato",[
+ ["Teaser","","Profilo anonimo di una o due pagine che descrive l'azienda senza rivelarne il nome. È il primo documento che un compratore vede."],
+ ["NDA","Accordo di riservatezza","Il contratto che il compratore firma per ricevere il nome dell'azienda e l'information memorandum."],
+ ["Information Memorandum (IM)","","Documento di 30-60 pagine con storia, mercato, numeri e piano dell'azienda. Si rilascia dopo l'NDA."],
+ ["Data room","","Archivio, oggi quasi sempre digitale, dove il venditore mette i documenti per la due diligence: bilanci, contratti, visure, contenziosi."],
+ ["Offerta non vincolante","Non-binding offer (NBO)","Prima proposta scritta del compratore, con prezzo indicativo e struttura. Serve a selezionare chi passa alla fase successiva."]]],
+ ["In trattativa",[
+ ["Lettera di intenti","Letter of intent (LOI)","Accordo che fissa prezzo, perimetro, esclusiva e tempi della due diligence. Vincolante solo in alcune parti, di solito riservatezza ed esclusiva."],
+ ["Esclusiva","Exclusivity","Periodo, in genere 60-90 giorni, in cui il venditore si impegna a non trattare con altri mentre il compratore fa la due diligence."],
+ ["Due diligence","","Verifica approfondita dell'azienda da parte del compratore: contabile, fiscale, legale, giuslavoristica, a volte ambientale e tecnica."],
+ ["Vendor due diligence","","La stessa verifica, ma commissionata dal venditore prima di andare sul mercato, per scoprire e sistemare i problemi in anticipo."],
+ ["Earn-out","","Parte del prezzo pagata dopo il closing, solo se l'azienda raggiunge risultati concordati. Collega le aspettative di chi vende e chi compra."],
+ ["Aggiustamento prezzo","Price adjustment","Meccanismo per correggere il prezzo al closing in base a debito, cassa e capitale circolante effettivi rispetto a quelli concordati."],
+ ["Locked box","","Alternativa all'aggiustamento: il prezzo si fissa su un bilancio passato e il venditore garantisce che nulla sia uscito dall'azienda da quella data."]]],
+ ["Al closing e dopo",[
+ ["SPA","Sale and purchase agreement","Il contratto di compravendita delle quote o azioni. Contiene prezzo, garanzie, indennizzi e condizioni sospensive."],
+ ["Signing e closing","","Il signing è la firma del contratto; il closing è il momento in cui passano le quote e il denaro. Tra i due possono esserci settimane, per autorizzazioni o condizioni da avverare."],
+ ["Garanzie e indennizzi","Representations & warranties","Dichiarazioni del venditore sullo stato dell'azienda. Se risultano false, il compratore ha diritto a un indennizzo entro limiti e tempi definiti."],
+ ["Escrow","","Parte del prezzo depositata presso un terzo per un periodo, a garanzia degli indennizzi. Di solito 5-15% per 12-24 mesi."],
+ ["Patto di non concorrenza","Non-compete","Impegno del venditore a non avviare un'attività concorrente per un periodo, in Italia di norma fino a 5 anni."],
+ ["Reinvestimento","Rollover","Il venditore reinveste parte del ricavato nella nuova struttura, restando socio di minoranza. Comune nelle operazioni con fondi."],
+ ["Vendor loan","","Parte del prezzo che il venditore lascia in azienda come finanziamento, rimborsato dopo il closing con interessi. Riduce il capitale che il compratore deve mettere."],
+ ["Assicurazione W&I","Warranty & indemnity insurance","Polizza che copre il compratore se le garanzie del venditore risultano false. Permette al venditore di incassare tutto subito senza escrow."]]],
+ ["Strutture e strumenti",[
+ ["LBO","Leveraged buy-out","Acquisizione finanziata in gran parte con debito bancario, che viene poi ripagato dalla cassa dell'azienda acquisita. È la struttura tipica dei fondi."],
+ ["MBO / MBI","Management buy-out / buy-in","Acquisizione guidata dai manager già in azienda (MBO) o da manager esterni (MBI), di norma con il sostegno di un fondo."],
+ ["Buy-and-build e add-on","","Strategia di un fondo che compra un'azienda piattaforma e le aggrega altre più piccole del settore (add-on) per creare un gruppo e rivenderlo a un multiplo più alto."],
+ ["Club deal","","Operazione in cui più investitori privati, spesso imprenditori e family office, si uniscono per acquisire un'azienda che da soli non comprerebbero."],
+ ["Carve-out","","Cessione di un ramo d'azienda o di una divisione, separata dal resto del gruppo prima della vendita. Richiede contratti di servizio transitori con il venditore."],
+ ["Patti parasociali","Shareholders' agreement","Accordo tra soci su governance, maggioranze e uscita. Contiene di solito tag-along (il socio di minoranza può vendere alle stesse condizioni della maggioranza) e drag-along (la maggioranza può obbligare la minoranza a vendere)."],
+ ["Clausola di cambio di controllo","Change of control","Clausola in un contratto con clienti, fornitori o banche che permette alla controparte di recedere se l'azienda cambia proprietà. Va mappata prima di andare sul mercato."],
+ ["Condizioni sospensive","Conditions precedent","Eventi che devono verificarsi tra signing e closing perché l'operazione si perfezioni: autorizzazioni, consensi di terzi, esito di verifiche."],
+ ["Golden power e antitrust","","Autorizzazioni pubbliche che possono servire prima del closing: la notifica antitrust sopra certe soglie di fatturato e il golden power del Governo per aziende in settori strategici."]]]],
+en:[["Before the mandate",[
+ ["Mandate","Mandato","Written engagement by which an owner instructs an adviser to find buyers (sell-side) or targets (buy-side). It sets duration, exclusivity and fees."],
+ ["Enterprise Value (EV)","","The value of the business as a whole, regardless of how it is financed. It is the number multiples are applied to."],
+ ["Equity Value","","What the seller actually receives: EV minus net financial debt. Excess cash is added."],
+ ["EBITDA","","Earnings before interest, taxes, depreciation and amortisation. A proxy for the cash generated by ordinary operations."],
+ ["Adjusted EBITDA","EBITDA normalizzato","EBITDA corrected for non-recurring or non-market items: owner's pay, intra-group rents, personal expenses. This is the figure that gets multiplied."],
+ ["Multiple","Multiplo","Ratio between EV and a financial metric, usually EBITDA. A company with €2m EBITDA sold at 6× has an EV of €12m."],
+ ["Net debt","Posizione finanziaria netta","Financial debt minus cash. The bridge between EV and equity value."],
+ ["Net working capital (NWC)","Capitale circolante netto","Receivables plus inventory minus payables. At closing it is compared with an agreed normal level: if lower, the price goes down."],
+ ["DCF","Discounted cash flow","A method that values the company by discounting future cash flows. More theoretical than multiples; used to confirm a range or for fast-growing businesses."]]],
+ ["Going to market",[
+ ["Teaser","","A one- or two-page anonymous profile describing the business without naming it. The first document a buyer sees."],
+ ["NDA","Non-disclosure agreement","The contract a buyer signs to receive the company name and the information memorandum."],
+ ["Information Memorandum (IM)","","A 30-60 page document with history, market, financials and plan. Released after the NDA."],
+ ["Data room","","The archive, now almost always virtual, where the seller places documents for due diligence: accounts, contracts, corporate records, litigation."],
+ ["Non-binding offer (NBO)","Offerta non vincolante","The buyer's first written proposal, with indicative price and structure. Used to select who moves to the next phase."]]],
+ ["In negotiation",[
+ ["Letter of intent (LOI)","Lettera di intenti","Agreement fixing price, scope, exclusivity and due diligence timing. Binding only in parts, usually confidentiality and exclusivity."],
+ ["Exclusivity","Esclusiva","Period, typically 60-90 days, during which the seller agrees not to negotiate with others while the buyer runs due diligence."],
+ ["Due diligence","","The buyer's in-depth review of the business: financial, tax, legal, employment, sometimes environmental and technical."],
+ ["Vendor due diligence","","The same review, commissioned by the seller before going to market to find and fix issues early."],
+ ["Earn-out","","Part of the price paid after closing, only if the business hits agreed results. Bridges seller and buyer expectations."],
+ ["Price adjustment","Aggiustamento prezzo","Mechanism correcting the price at closing for actual debt, cash and working capital versus agreed levels."],
+ ["Locked box","","Alternative to adjustment: the price is fixed on past accounts and the seller warrants that nothing has leaked out of the company since that date."]]],
+ ["At closing and after",[
+ ["SPA","Sale and purchase agreement","The contract transferring the shares. It contains price, warranties, indemnities and conditions precedent."],
+ ["Signing and closing","","Signing is the execution of the contract; closing is when shares and money change hands. Weeks may pass between the two, for approvals or conditions."],
+ ["Representations & warranties","Garanzie","The seller's statements about the state of the business. If untrue, the buyer is entitled to an indemnity within agreed caps and time limits."],
+ ["Escrow","","Part of the price held by a third party for a period as security for indemnities. Usually 5-15% for 12-24 months."],
+ ["Non-compete","Patto di non concorrenza","The seller's undertaking not to start a competing business for a period, in Italy typically up to 5 years."],
+ ["Rollover","Reinvestimento","The seller reinvests part of the proceeds in the new structure and stays on as a minority shareholder. Common in fund-backed deals."],
+ ["Vendor loan","","Part of the price the seller leaves in the company as a loan, repaid after closing with interest. It reduces the equity the buyer has to put in."],
+ ["W&I insurance","Warranty & indemnity","A policy covering the buyer if the seller's warranties prove untrue. It lets the seller receive the full price at closing without an escrow."]]],
+ ["Structures and tools",[
+ ["LBO","Leveraged buy-out","An acquisition financed largely with bank debt, repaid from the acquired company's cash flow. The typical fund structure."],
+ ["MBO / MBI","Management buy-out / buy-in","An acquisition led by the existing managers (MBO) or by external managers (MBI), usually backed by a fund."],
+ ["Buy-and-build and add-ons","","A fund strategy: buy a platform company and bolt on smaller ones in the same sector (add-ons) to build a group and sell it at a higher multiple."],
+ ["Club deal","","A deal in which several private investors, often entrepreneurs and family offices, join forces to buy a company none would buy alone."],
+ ["Carve-out","","The sale of a business unit or division, separated from the rest of the group before the sale. It needs transitional service agreements with the seller."],
+ ["Shareholders' agreement","Patti parasociali","An agreement among shareholders on governance, majorities and exit. It usually includes tag-along (the minority may sell on the same terms as the majority) and drag-along (the majority can force the minority to sell)."],
+ ["Change of control","Clausola di cambio di controllo","A clause in a contract with customers, suppliers or banks allowing the counterparty to terminate if the company changes hands. Map these before going to market."],
+ ["Conditions precedent","Condizioni sospensive","Events that must occur between signing and closing for the deal to complete: approvals, third-party consents, outcome of checks."],
+ ["Golden power and antitrust","","Public approvals that may be needed before closing: antitrust filing above certain revenue thresholds, and in Italy the government's golden power for companies in strategic sectors."]]]]};
+
+const ACADEMY={
+it:[
+ {n:"01",title:"Come funziona un'operazione M&A",sum:"Chi compra, chi vende, in quanto tempo e come si arriva al prezzo.",lessons:[
+  {t:"Chi compra e chi vende, e perché",p:["Ogni operazione nasce da due esigenze che si incontrano. Dal lato della vendita le ragioni più frequenti sono il passaggio generazionale senza un successore, la necessità di capitale per crescere, la volontà di un socio di uscire, o il bisogno di entrare in un gruppo più grande per reggere la concorrenza.","Dal lato dell'acquisto ci sono due famiglie di compratori, e si comportano in modo diverso. Il compratore industriale (o strategico) è un'azienda del settore: compra per aggiungere prodotti, clienti, territori o competenze, e di solito tiene l'azienda per sempre. Il compratore finanziario (fondo di private equity, family office, club di investitori) compra per far crescere l'azienda e rivenderla dopo 4-7 anni; chiede un piano, un management che resta, e spesso un reinvestimento del venditore.","Capire chi hai davanti cambia la trattativa: l'industriale paga per le sinergie e vuole integrare; il finanziario paga per la crescita futura e vuole continuità."]},
+  {t:"Le quattro fasi e i tempi",p:["Un'operazione tipo dura tra sette e nove mesi e passa per quattro fasi. La preparazione (1-2 mesi): valutazione preliminare, normalizzazione dei numeri, teaser e information memorandum. Il marketing (2-3 mesi): contatto riservato con una lista di potenziali compratori, firma degli NDA, raccolta delle offerte non vincolanti. La negoziazione (1-2 mesi): scelta del compratore, lettera di intenti con esclusiva. Il closing (2-3 mesi): due diligence, contratto di compravendita, firma e passaggio delle quote.","Intorno al tavolo siedono di norma: l'advisor finanziario, che guida il processo e tratta il prezzo; l'avvocato, che scrive e negozia i contratti; il fiscalista, che struttura l'operazione; e, dal lato compratore, i consulenti di due diligence.","Il momento in cui un'operazione salta più spesso è la due diligence: per questo la preparazione è la fase che più incide sul risultato."]},
+  {t:"Prezzo, valore e come si arriva al numero",p:["Il valore di un'azienda si esprime come Enterprise Value: quanto vale l'attività nel suo complesso, a prescindere da come è finanziata. Il metodo più usato nel mid-market è il multiplo dell'EBITDA: si prende il margine operativo lordo normalizzato e lo si moltiplica per un numero che dipende dal settore, dalla dimensione, dalla crescita e dal rischio. Un'azienda con 2 milioni di EBITDA e un multiplo di 6 vale 12 milioni di EV.","Dall'EV all'incasso del venditore si passa sottraendo il debito finanziario e aggiungendo la cassa in eccesso: è l'equity value, cioè il prezzo delle quote. Con 12 milioni di EV, 3 di debito e 1 di cassa, il venditore incassa 10.","Il prezzo finale si fissa nella lettera di intenti e si aggiusta al closing sui numeri effettivi di debito, cassa e capitale circolante. Una parte può essere differita con un earn-out. Il modulo 2 entra nel dettaglio di multipli e valutazione."]}],
+  quiz:[
+  {q:"Un fondo di private equity compra un'azienda. Cosa si aspetta, tipicamente?",o:["Di tenerla per sempre e integrarla con le sue attività","Di farla crescere e rivenderla in 4-7 anni, con il management che resta","Di chiuderla e tenere solo il marchio"],a:1,w:"Il compratore finanziario ha un orizzonte definito e vende per realizzare il ritorno; per questo chiede continuità del management."},
+  {q:"EV 15 milioni, debito finanziario 4, cassa 1. Quanto incassa il venditore (equity value)?",o:["15 milioni","11 milioni","12 milioni"],a:2,w:"Equity value = EV − debito + cassa = 15 − 4 + 1 = 12."},
+  {q:"In quale fase un'operazione salta più spesso?",o:["Nella preparazione del teaser","Nella due diligence","Dopo il closing"],a:1,w:"Le sorprese emergono in due diligence: contratti scaduti, contenziosi, accantonamenti mancanti. Si prevengono preparando l'azienda prima di andare sul mercato."}]},
+ {n:"02",title:"Valutazione e multipli",sum:"EBITDA normalizzato, multipli di mercato, DCF, e perché due aziende con gli stessi numeri valgono diversamente.",out:["Normalizzare l'EBITDA: cosa togliere e cosa aggiungere","Multipli di settore e come leggerli","Qualità dei ricavi: ricorrenza, concentrazione, marginalità"]},
+ {n:"03",title:"Preparare l'azienda alla vendita",sum:"I due anni prima: rendere l'azienda vendibile senza il fondatore.",out:["Deleghe, seconda linea e procedure","Pulizia dei bilanci e dei contratti","Vendor due diligence: scoprire i problemi prima del compratore"]},
+ {n:"04",title:"Teaser, NDA e information memorandum",sum:"I documenti che presentano l'azienda al mercato senza esporla.",out:["Scrivere un teaser anonimo che funziona","L'NDA: cosa proteggere e per quanto","L'information memorandum: struttura e numeri che contano"]},
+ {n:"05",title:"LOI, due diligence e contratto",sum:"Dalla lettera di intenti alla firma: dove si vince e si perde il prezzo.",out:["Cosa fissare nella LOI e cosa lasciare aperto","Sopravvivere alla due diligence","Il contratto: prezzo, aggiustamenti, garanzie, earn-out"]},
+ {n:"06",title:"Il giorno dopo il closing",sum:"Integrazione, earn-out e il ruolo del venditore dopo la vendita.",out:["I primi 100 giorni","Gestire l'earn-out senza litigare","Reinvestimento e seconda uscita"]}],
+en:[
+ {n:"01",title:"How an M&A deal works",sum:"Who buys, who sells, how long it takes and how the price is reached.",lessons:[
+  {t:"Who buys, who sells, and why",p:["Every deal starts with two needs meeting. On the sell side the most common reasons are succession with no heir, capital needed to grow, a shareholder wanting out, or the need to join a larger group to stay competitive.","On the buy side there are two families of buyers, and they behave differently. The strategic (or trade) buyer is a company in the sector: it buys to add products, customers, territories or skills, and usually keeps the business forever. The financial buyer (a private equity fund, a family office, an investor club) buys to grow the business and sell it after 4-7 years; it asks for a plan, a management team that stays, and often a seller reinvestment.","Knowing who is across the table changes the negotiation: the strategic buyer pays for synergies and wants to integrate; the financial buyer pays for future growth and wants continuity."]},
+  {t:"The four phases and the timeline",p:["A typical deal takes seven to nine months and moves through four phases. Preparation (1-2 months): preliminary valuation, normalised figures, teaser and information memorandum. Marketing (2-3 months): confidential contact with a list of potential buyers, NDAs, non-binding offers. Negotiation (1-2 months): buyer selection, letter of intent with exclusivity. Closing (2-3 months): due diligence, sale and purchase agreement, signing and transfer of shares.","Around the table you usually find: the financial adviser, who runs the process and negotiates price; the lawyer, who drafts and negotiates contracts; the tax adviser, who structures the deal; and, on the buy side, the due diligence teams.","The moment a deal most often collapses is due diligence, which is why preparation is the phase with the biggest effect on the outcome."]},
+  {t:"Price, value and how the number is reached",p:["A company's value is expressed as Enterprise Value: what the business is worth as a whole, regardless of how it is financed. The most common method in the mid-market is the EBITDA multiple: take normalised EBITDA and multiply it by a number that depends on sector, size, growth and risk. A company with €2m EBITDA and a 6× multiple has an EV of €12m.","From EV to the seller's proceeds you subtract financial debt and add excess cash: that is equity value, the price of the shares. With €12m EV, €3m debt and €1m cash, the seller receives €10m.","The final price is set in the letter of intent and adjusted at closing for actual debt, cash and working capital. Part of it can be deferred through an earn-out. Module 2 goes into multiples and valuation in detail."]}],
+  quiz:[
+  {q:"A private equity fund buys a company. What does it typically expect?",o:["To keep it forever and integrate it with its own operations","To grow it and sell it in 4-7 years, with management staying on","To shut it down and keep only the brand"],a:1,w:"A financial buyer has a defined horizon and sells to realise its return; that is why it asks for management continuity."},
+  {q:"EV €15m, financial debt €4m, cash €1m. What does the seller receive (equity value)?",o:["€15m","€11m","€12m"],a:2,w:"Equity value = EV − debt + cash = 15 − 4 + 1 = 12."},
+  {q:"In which phase do deals most often collapse?",o:["While preparing the teaser","During due diligence","After closing"],a:1,w:"Surprises surface in due diligence: expired contracts, litigation, missing provisions. They are prevented by preparing the company before going to market."}]},
+ {n:"02",title:"Valuation and multiples",sum:"Normalised EBITDA, market multiples, DCF, and why two companies with the same numbers are worth different amounts.",out:["Normalising EBITDA: what to remove and what to add","Sector multiples and how to read them","Revenue quality: recurrence, concentration, margins"]},
+ {n:"03",title:"Preparing the company for sale",sum:"The two years before: making the company saleable without the founder.",out:["Delegation, second line and procedures","Cleaning up accounts and contracts","Vendor due diligence: finding problems before the buyer does"]},
+ {n:"04",title:"Teaser, NDA and information memorandum",sum:"The documents that present the company to the market without exposing it.",out:["Writing an anonymous teaser that works","The NDA: what to protect and for how long","The information memorandum: structure and the numbers that matter"]},
+ {n:"05",title:"LOI, due diligence and the contract",sum:"From letter of intent to signing: where price is won and lost.",out:["What to fix in the LOI and what to leave open","Surviving due diligence","The contract: price, adjustments, warranties, earn-out"]},
+ {n:"06",title:"The day after closing",sum:"Integration, earn-out and the seller's role after the sale.",out:["The first 100 days","Managing the earn-out without a fight","Reinvestment and the second exit"]}]};
+
+let L="it";
+try{const s=localStorage.getItem("naviros-lang");if(s==="en"||s==="it")L=s}catch(e){}
+const $=s=>document.querySelector(s);
+const t=k=>T[L][k];
+const fmt=n=>n==null?t("nd"):n.toLocaleString(L==="it"?"it-IT":"en-GB",{minimumFractionDigits:1,maximumFractionDigits:1});
+const money=n=>n==null?"—":`€ ${fmt(n)} ${t("mln")}`;
+
+function dealCard(d){
+  const b=document.createElement("button");b.className="deal";b.type="button";
+  b.innerHTML=`<span class="code">${d.id}</span><div class="t"><h3>${d.title[L]}</h3><div class="meta"><span class="chip side">${t("sides")[d.side]}</span><span class="chip">${d.sector[L]}</span><span class="chip">${d.area[L]}</span><span class="chip">${d.reason[L]}</span></div></div><div class="kpi"><b>${money(d.rev)}</b><span>${t("rev")}</span><br><b>${money(d.ebitda)}</b><span>${t("ebitda")}</span></div>`;
+  b.addEventListener("click",()=>openDeal(d.id));return b;
+}
+let openDealId=null;
+function openDeal(id){
+  const d=DEALS.find(x=>x.id===id);if(!d)return;openDealId=id;
+  location.hash="opportunita";
+  const el=$("#detail");el.hidden=false;
+  const ev=d.ev.replace("fino a",L==="it"?"fino a":"up to");
+  el.innerHTML=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${d.id} · ${t("sides")[d.side]}</span><button class="x" type="button" id="closeDeal">${t("close")}</button></div>
+  <h2>${d.title[L]}</h2><p class="lead">${d.desc[L]}</p>
+  <div class="grid4"><div><small>${t("rev")}</small><b>${money(d.rev)}</b></div><div><small>${t("ebitda")}</small><b>${money(d.ebitda)}</b></div><div><small>${t("evr")}</small><b>€ ${ev} ${t("mln")}</b></div><div><small>${t("area")}</small><b>${d.area[L]}</b></div></div>
+  <div class="lock">${t("lock")}</div>
+  <div class="row"><a class="cta" href="#contatti" id="askNda">${t("nda")}</a></div>`;
+  $("#closeDeal").onclick=()=>{el.hidden=true;openDealId=null};
+  $("#askNda").onclick=()=>{$("#c-type").selectedIndex=2;$("#c-msg").value=t("c_req")(d.id,d.title[L])};
+}
+function articleCard(a,short){
+  const b=document.createElement("button");b.className="article";b.type="button";
+  b.innerHTML=`<span class="by">${a.date} · ${a.by}</span><h3>${a.title}</h3>${short?"":`<p>${a.sum}</p>`}`;
+  b.addEventListener("click",()=>openArticle(a.id,true));return b;
+}
+let openArtId=null;
+function openArticle(id,go){
+  const a=ARTICLES[L].find(x=>x.id===id);if(!a)return;openArtId=id;
+  if(go)location.hash="insight";
+  const r=$("#reader");r.hidden=false;
+  r.innerHTML=`<div class="row" style="justify-content:space-between"><span class="by eyebrow">${a.date} · ${a.by}</span><button class="x" type="button" id="closeArt">${t("close")}</button></div><h2>${a.title}</h2>${a.body.map(p=>`<p>${p}</p>`).join("")}`;
+  $("#closeArt").onclick=()=>{r.hidden=true;openArtId=null};
+  if(go)r.scrollIntoView({block:"start",behavior:"smooth"});
+}
+
+function fillSelect(sel,first,vals){const cur=sel.value;sel.innerHTML="";sel.append(new Option(first,""));vals.forEach(v=>sel.append(new Option(v.label,v.value)));sel.value=cur;if(sel.selectedIndex<0)sel.selectedIndex=0}
+function applyFilters(){
+  const side=$("#f-side").value,sec=$("#f-sector").value,area=$("#f-area").value,rev=parseFloat($("#f-rev").value)||0,q=$("#f-q").value.trim().toLowerCase();
+  const out=DEALS.filter(d=>(!side||d.side===side)&&(!sec||d.sector.it===sec)&&(!area||d.area.it===area)&&d.rev>=rev&&(!q||(d.title[L]+" "+d.sector[L]+" "+d.area[L]+" "+d.reason[L]+" "+d.desc[L]).toLowerCase().includes(q)));
+  const box=$("#all-deals");box.innerHTML="";
+  $("#count").textContent=t("count")(out.length,DEALS.length);
+  if(!out.length){box.innerHTML=`<div class="empty">${t("empty")}</div>`;return}
+  out.forEach(d=>box.append(dealCard(d)));
+}
+["f-side","f-sector","f-area","f-rev","f-q"].forEach(id=>$("#"+id).addEventListener("input",applyFilters));
+
+function render(){
+  document.documentElement.lang=L;
+  document.querySelectorAll("[data-t]").forEach(el=>{const v=t(el.dataset.t);if(typeof v==="string")el.textContent=v});
+  $("#l-it").classList.toggle("on",L==="it");$("#l-en").classList.toggle("on",L==="en");
+  $("#f-q").placeholder=t("f_q_ph");$("#c-msg").placeholder=t("c_msg_ph");
+  fillSelect($("#f-side"),t("all"),Object.keys(t("sides")).map(k=>({value:k,label:t("sides")[k]})));
+  const uniq=k=>[...new Map(DEALS.map(d=>[d[k].it,d[k][L]])).entries()].sort((a,b)=>a[1].localeCompare(b[1])).map(([v,l])=>({value:v,label:l}));
+  fillSelect($("#f-sector"),t("allm"),uniq("sector"));fillSelect($("#f-area"),t("all"),uniq("area"));
+  const ct=$("#c-type"),ci=ct.selectedIndex;ct.innerHTML="";t("c_opts").forEach(o=>ct.append(new Option(o)));ct.selectedIndex=ci<0?0:ci;
+  applyFilters();
+  $("#home-deals").innerHTML="";DEALS.slice(0,3).forEach(d=>$("#home-deals").append(dealCard(d)));
+  $("#home-articles").innerHTML="";ARTICLES[L].slice(0,3).forEach(a=>$("#home-articles").append(articleCard(a,true)));
+  $("#all-articles").innerHTML="";ARTICLES[L].forEach(a=>$("#all-articles").append(articleCard(a,false)));
+  $("#weekly").innerHTML=WEEKLY[L].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
+  $("#steps").innerHTML=STEPS[L].map(s=>`<div class="step"><span class="eyebrow">${s[0]}</span><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join("");
+  const li=a=>a.map(x=>`<li><b>${x[0]}</b><span>${x[1]}</span></li>`).join("");
+  $("#sell").innerHTML=li(SELL[L]);$("#buy").innerHTML=li(BUY[L]);
+  $("#rules").innerHTML=RULES[L].map(r=>`<div><span class="k">${r[0]}</span><span>${r[1]}</span></div>`).join("");
+  $("#gloss").innerHTML=GLOSS[L].map(c=>`<div class="cat"><span class="eyebrow">${c[0]}</span><dl>${c[1].map(e=>`<dt>${e[0]}${e[1]?`<small>${e[1]}</small>`:""}</dt><dd>${e[2]}</dd>`).join("")}</dl></div>`).join("");
+  $("#mods").innerHTML=ACADEMY[L].map(m=>{
+    const done=!!m.lessons;
+    const inner=done?`<div class="body">${m.lessons.map(l=>`<div class="lesson"><h4>${l.t}</h4>${l.p.map(x=>`<p>${x}</p>`).join("")}</div>`).join("")}
+      <div class="quiz"><span class="eyebrow">${t("ac_quiz")}</span>${m.quiz.map((q,i)=>`<div class="q" data-a="${q.a}"><p>${i+1}. ${q.q}</p><div class="opts">${q.o.map((o,j)=>`<button type="button" data-j="${j}">${o}</button>`).join("")}</div><div class="why" hidden>${q.w}</div></div>`).join("")}</div></div>`
+      :`<div class="body"><span class="eyebrow">${t("ac_lessons")}</span><ol class="outline">${m.out.map(x=>`<li>${x}</li>`).join("")}</ol></div>`;
+    return `<details class="mod"${m.n==="01"?" open":""}><summary><span class="n">${m.n}</span><div><h3>${m.title}</h3><p>${m.sum}</p></div><span class="st">${done?t("ac_done"):t("ac_soon")}</span></summary>${inner}</details>`}).join("");
+  document.querySelectorAll(".q button").forEach(b=>b.addEventListener("click",e=>{const q=e.target.closest(".q");const a=+q.dataset.a;q.querySelectorAll("button").forEach(x=>{x.classList.remove("ok","no");x.disabled=true});e.target.classList.add(+e.target.dataset.j===a?"ok":"no");q.querySelector("button[data-j='"+a+"']").classList.add("ok");q.querySelector(".why").hidden=false}));
+  if(openDealId)openDeal(openDealId);if(openArtId)openArticle(openArtId,false);
+}
+function setLang(l){L=l;try{localStorage.setItem("naviros-lang",l)}catch(e){}render()}
+$("#l-it").addEventListener("click",()=>setLang("it"));$("#l-en").addEventListener("click",()=>setLang("en"));
+
+const ROUTES=["home","opportunita","insight","advisory","glossario","contatti"];
+function route(){
+  let h=location.hash.replace("#","");if(!ROUTES.includes(h))h="home";
+  document.querySelectorAll(".view").forEach(v=>v.hidden=v.id!=="v-"+h);
+  document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r===h));
+}
+window.addEventListener("hashchange",route);
+
+$("#form").addEventListener("submit",e=>{e.preventDefault();$("#ok").hidden=false;$("#ok").scrollIntoView({block:"nearest"})});
+$("#copy").addEventListener("click",()=>{const txt="deals@naviros.it";const done=()=>{$("#copy").textContent=t("copied");setTimeout(()=>$("#copy").textContent=t("copy"),1500)};
+  const fb=()=>{const r=document.createRange();r.selectNodeContents($("#copy").previousElementSibling);getSelection().removeAllRanges();getSelection().addRange(r)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(fb)}else fb()});
+
+render();route();
+</script>
+
+</body>
+</html>

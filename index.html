@@ -65,7 +65,8 @@ main .wrap{padding-block:40px 72px}
 .hero{display:grid;gap:28px;grid-template-columns:1.3fr 1fr;align-items:end;padding-bottom:40px;border-bottom:1px solid var(--line)}
 .hero p.lead{font-size:1.15rem;max-width:36rem;margin-top:16px}
 .ticker{font-family:var(--mono);font-size:.82rem;border:1px solid var(--line);background:var(--surface);padding:16px 18px;min-width:0}
-.ticker div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.ticker div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.ticker span:last-child{text-align:right}
 .ticker div:last-child{border-bottom:0}
 .ticker span:last-child{color:var(--accent)}
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:500;padding:11px 18px;border-radius:4px;border:0;cursor:pointer;font-size:.95rem;font-family:var(--body)}
@@ -86,6 +87,7 @@ section{margin-top:44px}
 .deal{background:var(--surface);border:1px solid var(--line);padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:start;text-align:left;width:100%;color:inherit;font:inherit;cursor:pointer;border-radius:3px}
 .deal:hover{border-color:var(--accent)}
 .code{font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:3px;min-width:5.2em}
+.ex{display:inline-block;margin-top:4px;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);padding:2px 6px;border-radius:3px}
 .deal .t{min-width:0}
 .deal h3{font-family:var(--body);font-weight:600;font-size:1rem}
 .deal .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -215,16 +217,16 @@ footer .wrap{padding-block:22px;display:flex;justify-content:space-between;gap:1
       <h1 style="margin-top:10px" data-t="h_title"></h1>
       <p class="lead" data-t="h_lead"></p>
       <div class="row mt">
-        <a class="cta" href="#opportunita" data-t="h_cta1"></a>
-        <a class="cta ghost" href="#contatti" data-t="h_cta2"></a>
+        <a class="cta" href="#contatti" data-t="h_cta1"></a>
+        <a class="cta ghost" href="#opportunita" data-t="h_cta2"></a>
       </div>
     </div>
     <div class="ticker">
-      <div><span data-t="t1"></span><span class="num">24</span></div>
-      <div><span data-t="t2"></span><span class="num">€ 312 mln</span></div>
-      <div><span data-t="t3"></span><span class="num">6,8×</span></div>
+      <div><span data-t="t1"></span><span class="num" data-t="t1v"></span></div>
+      <div><span data-t="t2"></span><span class="num" data-t="t2v"></span></div>
+      <div><span data-t="t3"></span><span class="num" data-t="t3v"></span></div>
       <div><span data-t="t4"></span><span class="num" data-t="t4v"></span></div>
-      <div><span data-t="t5"></span><span class="num">28.10.2026</span></div>
+      <div><span data-t="t5"></span><span class="num">10.2026</span></div>
     </div>
   </div>
   <section>
@@ -324,14 +326,14 @@ footer .wrap{padding-block:22px;display:flex;justify-content:space-between;gap:1
 
 <script>
 const T={
-it:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunità",n_ins:"Insight",n_adv:"Advisory & Academy",n_glo:"Glossario",n_con:"Contatti",demo:"Dati dimostrativi",
- h_eye:"Companies. Capital. Deals.",h_title:"Dove le aziende italiane cambiano proprietà.",h_lead:"Mandati di cessione e acquisizione verificati, anonimi fino alla firma dell'NDA, e un'analisi settimanale del mercato scritta da chi i deal li chiude.",h_cta1:"Vedi le opportunità",h_cta2:"Pubblica un mandato",
- t1:"Mandati attivi",t2:"EV complessivo in listino",t3:"Multiplo mediano EV/EBITDA",t4:"Tempo mediano al closing",t4v:"7,5 mesi",t5:"Aggiornato",
- s_feat:"In evidenza",s_all_opp:"Tutte le opportunità →",s_ins:"Ultimi insight",s_all_ins:"Tutti gli articoli →",
- o_title:"Opportunità di cessione e acquisizione",o_lead:"Ogni scheda è anonima: il nome della società e il memorandum informativo sono accessibili solo dopo la firma dell'accordo di riservatezza.",
+it:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunità",n_ins:"Insight",n_adv:"Advisory & Academy",n_glo:"Glossario",n_con:"Contatti",demo:"Schede di esempio",
+ h_eye:"Companies. Capital. Deals.",h_title:"Dove le aziende italiane cambiano proprietà.",h_lead:"Un punto d'incontro riservato tra imprenditori che cedono o cercano capitale e investitori che acquisiscono. Mandati anonimi fino all'NDA, analisi di mercato e formazione. Stiamo raccogliendo i primi mandati.",h_cta1:"Pubblica un mandato",h_cta2:"Vedi come funziona",
+ t1:"Tipi di mandato",t1v:"Cessione · Acquisizione · Minoranza",t2:"Fatturato tipico",t2v:"€ 3–50 mln",t3:"Riservatezza",t3v:"Anonimo fino all'NDA",t4:"Durata tipica",t4v:"7–9 mesi",t5:"Apertura",
+ ex:"esempio",s_feat:"Come funziona una scheda",s_all_opp:"Tutte le opportunità →",s_ins:"Ultimi insight",s_all_ins:"Tutti gli articoli →",
+ o_title:"Opportunità di cessione e acquisizione",o_lead:"Le schede qui sotto sono esempi che mostrano come viene presentato un mandato: anonimo, con i numeri chiave, e con nome e documenti accessibili solo dopo la firma dell'NDA. I primi mandati reali sono in raccolta: se vuoi cedere, acquisire o cercare un socio, pubblica il tuo.",
  f_side:"Tipo di operazione",f_sector:"Settore",f_area:"Area",f_rev:"Fatturato minimo (€ mln)",f_q:"Cerca",f_q_ph:"es. packaging, Veneto, passaggio generazionale",all:"Tutte",allm:"Tutti",count:(a,b)=>`${a} opportunità su ${b}`,empty:"Nessuna opportunità con questi criteri. Prova ad allargare i filtri.",
  rev:"fatturato",ebitda:"EBITDA",evr:"Range EV",area:"Area",lock:"Ragione sociale, bilanci e information memorandum disponibili dopo la firma dell'NDA.",nda:"Richiedi accesso (NDA)",close:"Chiudi",nd:"n.d.",
- i_title:"Analisi, multipli e deal della settimana",w_title:"Deal della settimana · 20–26 ott 2026",w_note:"Operazioni di esempio a scopo dimostrativo.",
+ i_title:"Analisi, multipli e deal della settimana",w_title:"Esempi di operazioni tipiche",w_note:"Operazioni illustrative, non reali. La rubrica dei deal della settimana partirà con i dati di mercato.",
  a_title:"Accompagniamo imprenditori e investitori dal primo incontro al closing.",a_lead:"Un'operazione di M&A dura in media sette-nove mesi e attraversa quattro fasi. Prima ancora di affidare un mandato, ci sono alcune regole di base che fanno la differenza tra un buon prezzo e una trattativa che si arena.",
  ac_title:"Academy",ac_lead:"Un percorso gratuito in sei moduli per capire come funziona davvero un'operazione, dal primo incontro al giorno dopo il closing. Il modulo 1 è completo; gli altri sono in scrittura.",ac_done:"Completo",ac_soon:"In arrivo",ac_quiz:"Mettiti alla prova",ac_lessons:"Lezioni",
  a_adv_title:"Consigli di base",a_sell:"Se vendi",a_buy:"Se compri",a_rules:"Regole che valgono per tutti",a_cta:"Richiedi una valutazione",
@@ -339,14 +341,14 @@ it:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunità",n_ins:"Insight
  c_title:"Pubblica un mandato o chiedi accesso a un'opportunità",c_lead:"Rispondiamo entro due giorni lavorativi. Tutte le richieste sono trattate in modo riservato.",c_name:"Nome e cognome",c_co:"Società",c_int:"Interesse",c_msg:"Messaggio",c_msg_ph:"Settore, dimensione, tempistiche, codice dell'opportunità se presente",c_send:"Invia richiesta",c_ok:"Richiesta registrata. In questa versione dimostrativa il modulo non invia email: scrivici direttamente all'indirizzo qui sotto.",c_addr:"Indirizzo di esempio",copy:"Copia",copied:"Copiato",c_opts:["Voglio cedere la mia azienda","Cerco aziende da acquisire","Accesso a un'opportunità specifica","Altro"],c_req:(id,t)=>`Richiesta di accesso all'opportunità ${id} – ${t}`,
  f_l:"© 2026 Naviros · versione dimostrativa",f_r:"Le schede non costituiscono offerta al pubblico né sollecitazione all'investimento.",
  sides:{Cessione:"Cessione",Acquisizione:"Acquisizione",Minoranza:"Minoranza"},mln:"mln"},
-en:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunities",n_ins:"Insight",n_adv:"Advisory & Academy",n_glo:"Glossary",n_con:"Contact",demo:"Sample data",
- h_eye:"Companies. Capital. Deals.",h_title:"Where Italian companies change hands.",h_lead:"Verified sell-side and buy-side mandates, anonymous until the NDA is signed, and a weekly market read written by people who close deals.",h_cta1:"Browse opportunities",h_cta2:"List a mandate",
- t1:"Active mandates",t2:"Total EV listed",t3:"Median EV/EBITDA multiple",t4:"Median time to closing",t4v:"7.5 months",t5:"Updated",
- s_feat:"Featured",s_all_opp:"All opportunities →",s_ins:"Latest insight",s_all_ins:"All articles →",
- o_title:"Sell-side and buy-side opportunities",o_lead:"Every listing is anonymous: the company name and the information memorandum are released only after a non-disclosure agreement is signed.",
+en:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunities",n_ins:"Insight",n_adv:"Advisory & Academy",n_glo:"Glossary",n_con:"Contact",demo:"Sample listings",
+ h_eye:"Companies. Capital. Deals.",h_title:"Where Italian companies change hands.",h_lead:"A confidential meeting point between owners who sell or seek capital and investors who acquire. Mandates anonymous until the NDA, market insight and training. We are collecting the first mandates.",h_cta1:"List a mandate",h_cta2:"See how it works",
+ t1:"Mandate types",t1v:"Sell · Buy · Minority",t2:"Typical revenue",t2v:"€3–50m",t3:"Confidentiality",t3v:"Anonymous until NDA",t4:"Typical duration",t4v:"7–9 months",t5:"Launched",
+ ex:"example",s_feat:"How a listing works",s_all_opp:"All opportunities →",s_ins:"Latest insight",s_all_ins:"All articles →",
+ o_title:"Sell-side and buy-side opportunities",o_lead:"The listings below are examples showing how a mandate is presented: anonymous, with the key figures, and with name and documents released only after the NDA. The first real mandates are being collected: if you want to sell, acquire or find a partner, list yours.",
  f_side:"Deal type",f_sector:"Sector",f_area:"Region",f_rev:"Minimum revenue (€ m)",f_q:"Search",f_q_ph:"e.g. packaging, Veneto, succession",all:"All",allm:"All",count:(a,b)=>`${a} of ${b} opportunities`,empty:"No opportunities match these filters. Try widening them.",
  rev:"revenue",ebitda:"EBITDA",evr:"EV range",area:"Region",lock:"Company name, financial statements and information memorandum are released after the NDA is signed.",nda:"Request access (NDA)",close:"Close",nd:"n/a",
- i_title:"Analysis, multiples and deals of the week",w_title:"Deals of the week · 20–26 Oct 2026",w_note:"Sample transactions for demonstration purposes.",
+ i_title:"Analysis, multiples and deals of the week",w_title:"Examples of typical deals",w_note:"Illustrative, not real. The deals-of-the-week column will launch with market data.",
  a_title:"We walk owners and investors from the first meeting to closing.",a_lead:"An M&A process takes seven to nine months on average and moves through four phases. Before you even sign a mandate, a few basic rules separate a good price from a negotiation that stalls.",
  ac_title:"Academy",ac_lead:"A free six-module path to understand how a deal really works, from the first meeting to the day after closing. Module 1 is complete; the others are being written.",ac_done:"Complete",ac_soon:"Coming soon",ac_quiz:"Test yourself",ac_lessons:"Lessons",
  a_adv_title:"Basic advice",a_sell:"If you are selling",a_buy:"If you are buying",a_rules:"Rules that apply to everyone",a_cta:"Request a valuation",
@@ -358,15 +360,8 @@ en:{tag:"Deals, Insight, Advisory & Academy",n_opp:"Opportunities",n_ins:"Insigh
 
 const DEALS=[
  {id:"CES-041",side:"Cessione",sector:{it:"Packaging",en:"Packaging"},area:{it:"Veneto",en:"Veneto"},rev:28.5,ebitda:4.1,ev:"26–30",reason:{it:"Passaggio generazionale",en:"Succession"},title:{it:"Azienda di packaging flessibile per il food",en:"Flexible packaging company for the food sector"},desc:{it:"Tre linee di estrusione e stampa, 95 dipendenti, clientela diversificata nel largo consumo. Fondatore disponibile a un affiancamento di 18 mesi.",en:"Three extrusion and printing lines, 95 employees, diversified FMCG customer base. Founder available for an 18-month handover."}},
- {id:"CES-038",side:"Cessione",sector:{it:"Software",en:"Software"},area:{it:"Lombardia",en:"Lombardy"},rev:6.2,ebitda:1.5,ev:"12–15",reason:{it:"Exit dei soci fondatori",en:"Founders' exit"},title:{it:"Software house per la logistica (SaaS, ARR 70%)",en:"Logistics software house (SaaS, 70% ARR)"},desc:{it:"Piattaforma gestionale per operatori 3PL, 140 clienti ricorrenti, churn annuo sotto il 5%. Team tecnico di 22 persone che resta in azienda.",en:"Management platform for 3PL operators, 140 recurring customers, annual churn under 5%. Technical team of 22 stays on."}},
  {id:"ACQ-017",side:"Acquisizione",sector:{it:"Meccanica",en:"Engineering"},area:{it:"Nord Italia",en:"Northern Italy"},rev:10,ebitda:null,ev:"fino a 20",reason:{it:"Crescita per linee esterne",en:"External growth"},title:{it:"Gruppo meccanico cerca aziende di lavorazioni di precisione",en:"Engineering group seeks precision machining companies"},desc:{it:"Gruppo quotato con 180 mln di fatturato cerca target tra 10 e 40 mln, con EBITDA margin sopra il 12%, per integrare la filiera aerospace e medicale.",en:"Listed group with €180m revenue seeks targets between €10m and €40m, EBITDA margin above 12%, to integrate its aerospace and medical supply chain."}},
- {id:"CES-035",side:"Cessione",sector:{it:"Sanità",en:"Healthcare"},area:{it:"Emilia-Romagna",en:"Emilia-Romagna"},rev:11.8,ebitda:2.3,ev:"16–19",reason:{it:"Aggregazione con operatore più grande",en:"Join a larger operator"},title:{it:"Catena di 6 cliniche odontoiatriche",en:"Chain of 6 dental clinics"},desc:{it:"Strutture di proprietà in 4 città, 48 poltrone, direzione sanitaria disponibile a restare. Target ideale per un buy-and-build.",en:"Owned premises in 4 cities, 48 chairs, medical director willing to stay. Ideal buy-and-build target."}},
  {id:"MIN-009",side:"Minoranza",sector:{it:"Agroalimentare",en:"Food"},area:{it:"Emilia-Romagna",en:"Emilia-Romagna"},rev:14,ebitda:1.9,ev:"9–11",reason:{it:"Capitale per export",en:"Export capital"},title:{it:"Caseificio con DOP, ricerca socio al 35%",en:"PDO cheese dairy seeking a 35% partner"},desc:{it:"Produzione certificata, export al 30% del fatturato in crescita. Il socio di minoranza finanzia un nuovo stabilimento di stagionatura.",en:"Certified production, exports at 30% of revenue and growing. The minority partner funds a new ageing facility."}},
- {id:"CES-033",side:"Cessione",sector:{it:"Energia",en:"Energy"},area:{it:"Piemonte",en:"Piedmont"},rev:19.3,ebitda:2.6,ev:"13–16",reason:{it:"Pensionamento del titolare",en:"Owner retiring"},title:{it:"Impresa di impianti elettrici e fotovoltaici industriali",en:"Industrial electrical and solar installation contractor"},desc:{it:"Portafoglio ordini di 14 mesi, 60 tecnici, certificazioni SOA. Seconda linea manageriale già operativa.",en:"14-month order book, 60 technicians, public-works certifications. Second management line already in place."}},
- {id:"ACQ-015",side:"Acquisizione",sector:{it:"Arredo",en:"Furniture"},area:{it:"Italia",en:"Italy"},rev:8,ebitda:null,ev:"10–40",reason:{it:"Investimento di lungo periodo",en:"Long-term investment"},title:{it:"Family office cerca aziende di arredo e design",en:"Family office seeks furniture and design companies"},desc:{it:"Orizzonte di oltre 10 anni, nessuna leva aggressiva, disponibilità a mantenere il marchio e il management.",en:"Horizon over 10 years, no aggressive leverage, willing to keep brand and management."}},
- {id:"CES-030",side:"Cessione",sector:{it:"Servizi",en:"Services"},area:{it:"Toscana",en:"Tuscany"},rev:4.4,ebitda:0.9,ev:"5–6",reason:{it:"Cambio di attività dei soci",en:"Owners changing business"},title:{it:"Laboratorio di analisi ambientali accreditato",en:"Accredited environmental testing laboratory"},desc:{it:"Accreditamento ACCREDIA su 180 prove, contratti pluriennali con enti pubblici e utility.",en:"Accredited for 180 tests, multi-year contracts with public bodies and utilities."}},
- {id:"CES-028",side:"Cessione",sector:{it:"Retail",en:"Retail"},area:{it:"Lazio",en:"Lazio"},rev:9.6,ebitda:1.1,ev:"6–8",reason:{it:"Ricerca di un partner industriale",en:"Seeking an industrial partner"},title:{it:"E-commerce di ricambi auto con magazzino proprietario",en:"Car-parts e-commerce with own warehouse"},desc:{it:"Marketplace proprietario e presenza sui principali canali, 85.000 referenze a stock, logistica interna.",en:"Own marketplace plus major channels, 85,000 SKUs in stock, in-house logistics."}},
- {id:"MIN-008",side:"Minoranza",sector:{it:"Software",en:"Software"},area:{it:"Lombardia",en:"Lombardy"},rev:2.1,ebitda:-0.6,ev:"18–22",reason:{it:"Crescita",en:"Growth"},title:{it:"Fintech per il factoring alle PMI, round da 4 mln",en:"SME factoring fintech, €4m round"},desc:{it:"Erogato di 60 mln nei 12 mesi, licenza come agente di istituto finanziario, cerca investitori strategici o fondi.",en:"€60m funded in the last 12 months, licensed financial agent, seeking strategic investors or funds."}},
 ];
 
 const ARTICLES={
@@ -529,7 +524,7 @@ const money=n=>n==null?"—":`€ ${fmt(n)} ${t("mln")}`;
 
 function dealCard(d){
   const b=document.createElement("button");b.className="deal";b.type="button";
-  b.innerHTML=`<span class="code">${d.id}</span><div class="t"><h3>${d.title[L]}</h3><div class="meta"><span class="chip side">${t("sides")[d.side]}</span><span class="chip">${d.sector[L]}</span><span class="chip">${d.area[L]}</span><span class="chip">${d.reason[L]}</span></div></div><div class="kpi"><b>${money(d.rev)}</b><span>${t("rev")}</span><br><b>${money(d.ebitda)}</b><span>${t("ebitda")}</span></div>`;
+  b.innerHTML=`<span class="code">${d.id}<br><span class="ex">${t("ex")}</span></span><div class="t"><h3>${d.title[L]}</h3><div class="meta"><span class="chip side">${t("sides")[d.side]}</span><span class="chip">${d.sector[L]}</span><span class="chip">${d.area[L]}</span><span class="chip">${d.reason[L]}</span></div></div><div class="kpi"><b>${money(d.rev)}</b><span>${t("rev")}</span><br><b>${money(d.ebitda)}</b><span>${t("ebitda")}</span></div>`;
   b.addEventListener("click",()=>openDeal(d.id));return b;
 }
 let openDealId=null;
@@ -582,7 +577,7 @@ function render(){
   fillSelect($("#f-sector"),t("allm"),uniq("sector"));fillSelect($("#f-area"),t("all"),uniq("area"));
   const ct=$("#c-type"),ci=ct.selectedIndex;ct.innerHTML="";t("c_opts").forEach(o=>ct.append(new Option(o)));ct.selectedIndex=ci<0?0:ci;
   applyFilters();
-  $("#home-deals").innerHTML="";DEALS.slice(0,3).forEach(d=>$("#home-deals").append(dealCard(d)));
+  $("#home-deals").innerHTML="";DEALS.forEach(d=>$("#home-deals").append(dealCard(d)));
   $("#home-articles").innerHTML="";ARTICLES[L].slice(0,3).forEach(a=>$("#home-articles").append(articleCard(a,true)));
   $("#all-articles").innerHTML="";ARTICLES[L].forEach(a=>$("#all-articles").append(articleCard(a,false)));
   $("#weekly").innerHTML=WEEKLY[L].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");

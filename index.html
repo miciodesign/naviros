@@ -720,6 +720,7 @@ $("#copy").addEventListener("click",()=>{const txt="deals@naviros.it";const done
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(fb)}else fb()});
 
 render();route();
+fetch("news.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.it&&d.en){NEWS.it=d.it;NEWS.en=d.en;render()}}).catch(()=>{});
 </script>
 
 </body>
